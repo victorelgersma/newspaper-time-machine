@@ -26,13 +26,7 @@ $newspapers = [
 
 <body>
   <h1>Old News</h1>
-  <article>
-    <section>
-      <p>Welcome to Old News. The goal of this website is to resurrect some old newspapers from the crusty confines of
-        digital photocopies and make them readable and enjoyable for us 21st century critters.</p>
-
-    </section>
-  </article>
+  <nav><a href="about.php">About</a></nav>
 
   <ul>
     <?php foreach ($newspapers as $paper): ?>
