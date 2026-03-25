@@ -10,7 +10,7 @@ $newspapers = [
     "year" => 1844,
     "month" => 10,
     "newspaper" => "Liverpool Mercury",
-    "url" => "1844/mercury/"
+    "url" => "1844/10/mercury/"
   ],
   [
     "newspaper" => "Edinburgh Evening Post and Scottish Standard",

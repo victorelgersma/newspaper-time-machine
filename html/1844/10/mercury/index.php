@@ -7,7 +7,7 @@ $links = [
     "Link to original" => "https://britishnewspaperarchive.co.uk/viewer/bl/0000081/18451017/005/0001",
     "View photos" => "./photos"
 ];
-$headerPartial = __DIR__ . '/../../partials/newspaper-header.php';
+$headerPartial = __DIR__ . '/../../../partials/newspaper-header.php';
 ?>
 
 <!doctype html>
@@ -23,7 +23,7 @@ $headerPartial = __DIR__ . '/../../partials/newspaper-header.php';
     <?php require $headerPartial; ?>
 
     <section>
-      <?php require __DIR__ . '/../../partials/articles/mercury.html'; ?>
+      <?php require __DIR__ . '/../../../partials/articles/mercury.html'; ?>
     </section>
   </article>
 </body>

@@ -18,7 +18,7 @@ $images = glob($photo_dir . '/*.{jpg,jpeg,png,gif,webp}', GLOB_BRACE);
 </head>
 <body>
 
-<?php include __DIR__ . '/../../../partials/gallery.php'; ?>
+<?php include __DIR__ . '/../../../../partials/gallery.php'; ?>
 
 </body>
 </html>
