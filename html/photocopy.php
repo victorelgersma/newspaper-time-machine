@@ -1,20 +1,21 @@
 <?php
-// photocopy.php
+// ./html/photocopy.php
 require_once('data.php');
 
 $uri = $_GET['uri'] ?? '';
-// Strip .html to get the folder path (e.g., liverpool_mercury/1845/10/readership)
+$uri = str_replace(['../', '..\\'], '', $uri); // Sanitize
 $folder_name = str_replace('.html', '', $uri);
 
 $meta = $metadata[$uri] ?? [];
 $source_url = $meta['source_url'] ?? null;
 
-// DISK PATH: This is where PHP looks for filenames
+// Environment check: look for production path, fallback to local directory structure
 $local_photo_path = "/var/www/vjbe.net/html/oldnews-photos/" . $folder_name;
+if (!is_dir($local_photo_path)) {
+    // Local dev fallback folder inside your workspace
+    $local_photo_path = __DIR__ . "/oldnews-photos/" . $folder_name;
+}
 
-// URL PATH: This is what the browser uses to load the image
-// If your subdomain points to the 'oldnews-photos' folder, 
-// we don't include 'oldnews-photos' in the URL string.
 $photos_url_base = "https://oldnews-photos.vjbe.net";
 
 $images = [];
@@ -22,12 +23,12 @@ if (is_dir($local_photo_path)) {
     $files = scandir($local_photo_path);
     foreach ($files as $file) {
         if ($file !== '.' && $file !== '..' && preg_match('/\.(png|jpg|jpeg)$/i', $file)) {
-            // URL will look like: https://oldnews-photos.vjbe.net/liverpool_mercury/1845/10/readership/Screenshot...png
             $images[] = rtrim($photos_url_base, '/') . '/' . $folder_name . '/' . $file;
         }
     }
 }
 ?>
+<!-- ... rest of your HTML structure remains identical ... -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,7 +89,7 @@ if (is_dir($local_photo_path)) {
     <?php if (empty($images)): ?>
         <div class="error-msg">
             <p>No photocopies found.</p>
-            <p style="font-size: 0.8rem;">Checked Disk Path: <code><?= htmlspecialchars($local_photo_path) ?></code></p>
+            <!-- <p style="font-size: 0.8rem;">Checked Disk Path: <code><?= htmlspecialchars($local_photo_path) ?></code></p> -->
         </div>
     <?php else: ?>
         <?php foreach ($images as $img): ?>

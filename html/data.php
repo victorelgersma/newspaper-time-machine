@@ -9,6 +9,12 @@ $photos_base = "https://oldnews-photos.vjbe.net/";
 $publications = [
     'liverpool_mercury' => 'Liverpool Mercury',
     'manchester_guardian' => 'The Manchester Guardian',
+    'spectator' => 'The Spectator',
+    'examiner' => 'The Examiner',
+    'dublin_evening_post' => 'Dublin Evening Post',
+    'atlas' => 'The Atlas',
+    'edinburgh_evening_post_and_scottish_standard' => 'Edinburgh Evening Post',
+    'waterford_chronicle' => 'Waterford Chronicle'
 ];
 
 $metadata = [

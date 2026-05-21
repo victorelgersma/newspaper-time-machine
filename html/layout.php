@@ -39,7 +39,7 @@
             <?php else: ?>
                 <p class="subtitle">
                     <?= htmlspecialchars($pub_name) ?> —
-                    <?= $day_name ?> <?= $day_num ?> <?= $date_str ?>
+                    <?= $date_str ?>
                 </p>
                 <nav>
                     <a href="/">← Back to Archive</a> |
