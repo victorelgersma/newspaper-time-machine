@@ -37,7 +37,9 @@
     <article>
         <header>
             <h1><?= htmlspecialchars($site_name) ?></h1>
-            <p class="subtitle">Public domain newspaper articles, digitally republished for a 21st century audience.</p>
+            <nav>
+                <a href="/about">About</a>
+            </nav>
         </header>
 
         <section>
@@ -56,22 +58,6 @@
         </section>
 
 
-        <footer class="site-footer">
-            <hr>
-            <p>
-                Digital Archive maintained by Victor Elgersma.
-                Have you spotted a mistake?
-                <a href="mailto:v.j.b.elgersma@students.uu.nl">
-                    Send an email
-                </a>.
-            </p>
-            <p>
-                View this project on
-                <a href="https://github.com/victorelgersma/old-news" target="_blank" rel="noopener noreferrer">
-                    GitHub
-                </a>
-            </p>
-        </footer>
     </article>
 </body>
 

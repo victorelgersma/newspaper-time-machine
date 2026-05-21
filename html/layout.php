@@ -1,6 +1,6 @@
+<!-- ./html/layout.php -->
 <!DOCTYPE html>
 <html lang="en">
-<!-- ./html/layout.php -->
 
 <head>
     <meta charset="UTF-8">
@@ -31,36 +31,27 @@
 <body>
     <article>
         <header>
-            <p class="subtitle">
-                <?= htmlspecialchars($pub_name) ?> —
-                <?= $day_name ?> <?= $day_num ?> <?= $date_str ?>
-            </p>
-            <nav>
-                <a href="/">← Back to Archive</a> |
-                <a href="<?= $photo_link ?>" target="_blank">View Source</a>
-            </nav>
+            <?php if (isset($is_about_page) && $is_about_page === true): ?>
+                <h1>About Old News</h1>
+                <nav>
+                    <a href="/">← Back to Archive</a>
+                </nav>
+            <?php else: ?>
+                <p class="subtitle">
+                    <?= htmlspecialchars($pub_name) ?> —
+                    <?= $day_name ?> <?= $day_num ?> <?= $date_str ?>
+                </p>
+                <nav>
+                    <a href="/">← Back to Archive</a> |
+                    <a href="<?= $photo_link ?>" target="_blank">View Source</a>
+                </nav>
+            <?php endif; ?>
         </header>
 
         <section>
             <?= $content ?>
         </section>
 
-        <footer class="site-footer">
-            <hr>
-            <p>
-                Digital Archive maintained by Victor Elgersma.
-                Have you spotted a mistake?
-                <a href="mailto:v.j.b.elgersma@students.uu.nl">
-                Please send us an email. 
-                </a>.
-            </p>
-            <p>
-                View this project on
-                <a href="https://github.com/victorelgersma/old-news" target="_blank" rel="noopener noreferrer">
-                    GitHub
-                </a>
-            </p>
-        </footer>
     </article>
 </body>
 

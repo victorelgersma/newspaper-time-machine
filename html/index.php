@@ -16,7 +16,28 @@ if ($clean_uri === "" || $clean_uri === "index.php") {
     exit;
 }
 
+// 2b. About Page Route
+// 2b. About Page Route
+if ($clean_uri === "about") {
+    $title = "About | " . $site_name;
+    $pub_name = $site_name;
+    $day_name = "";
+    $day_num = "";
+    $date_str = "";
+    $photo_link = "/"; 
+    $is_about_page = true; // Add this conditional variable
+
+    // Capture the template output or include directly
+    ob_start();
+    include('about.php');
+    $content = ob_get_clean();
+
+    include('layout.php');
+    exit;
+}
+
 // 2. Photocopy Viewer Route
+
 if (strpos($clean_uri, 'photocopy/') === 0) {
     $uri = str_replace('photocopy/', '', $clean_uri);
     $uri = ltrim($uri, '/');

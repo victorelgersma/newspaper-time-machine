@@ -1,7 +1,7 @@
 <?php
 // data.php
 
-$site_name = "Old News Archive";
+$site_name = "Old News";
 $base_dir = "/var/www/vjbe.net/html"; 
 $articles_base = $base_dir . "/oldnews-articles-only";
 $photos_base = "https://oldnews-photos.vjbe.net/";
