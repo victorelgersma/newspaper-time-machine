@@ -1,6 +1,7 @@
 <?php
 // ./html/index.php
 require_once('data.php');
+require_once('counter.php'); // <-- Add this here
 
 $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $clean_uri = ltrim($request_uri, '/');
@@ -50,7 +51,6 @@ if (strpos($clean_uri, 'photocopy/') === 0) {
 }
 
 // 4. Article Route
-// 4. Article Route
 // Switch section #4 in index.php to a strict whitelist check
 if (array_key_exists($clean_uri, $metadata)) {
     $target_file = $articles_base . '/' . $clean_uri;
@@ -73,6 +73,8 @@ render_404();
 
 function render_article($uri, $full_path) {
     global $metadata, $publications;
+
+    $view_count = get_and_increment_page_views($uri);
 
     $meta = $metadata[$uri] ?? ['title' => basename($uri, '.html')];
     $parts = explode('/', $uri);

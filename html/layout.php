@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Add MathJax to support LaTeX in OCR fragments -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
@@ -52,6 +51,17 @@
             <?= $content ?>
         </section>
 
+
+        <!-- Add Counter Badge here -->
+        <?php if (isset($view_count)): ?>
+            <footer>
+                <hr style="width: 100%; margin-top: 3rem;">
+                <p class="sans" style="font-size: 0.85rem; color: #777; text-align: right;">
+                    Unique Visitors: <span class="numeral"><?= number_format($view_count) ?></span>
+                </p>
+            </footer>
+        <?php endif; ?>
+        
     </article>
 </body>
 

@@ -57,6 +57,15 @@
             </ul>
         </section>
 
+        <!-- Add Homepage Counter here -->
+        <?php if (isset($view_count)): ?>
+            <footer>
+                <hr style="width: 55%; margin-left: 0; margin-top: 4rem;">
+                <p class="sans" style="font-size: 0.85rem; color: #777;">
+                    This archive has been explored by <span class="numeral"><?= number_format($view_count) ?></span> unique historical minds.
+                </p>
+            </footer>
+        <?php endif; ?>
 
     </article>
 </body>
