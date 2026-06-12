@@ -1,7 +1,7 @@
 <?php
 // ./html/index.php
 require_once('data.php');
-require_once('counter.php'); // <-- Add this here
+require_once('counter.php');
 
 $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $clean_uri = ltrim($request_uri, '/');
@@ -88,28 +88,51 @@ function render_article($uri, $full_path) {
     $source_url = $meta['source_url'] ?? null;
     $photo_link = "/photocopy/" . $uri;
 
+
+    $dir = dirname($full_path);
+    $data_json_path = $dir . '/data.json';
+    $summary = null;
+    if (file_exists($data_json_path)) {
+        $json = json_decode(file_get_contents($data_json_path), true);
+        $summary = $json['summary'] ?? null;
+    }
+
     $content = file_get_contents($full_path);
     include('layout.php');
 }
 
 function render_home() {
-    global $site_name, $metadata, $publications;
+    global $site_name, $metadata, $publications, $articles_base;
+
+    $view_count = get_and_increment_page_views('home');
 
     $links = [];
     foreach ($metadata as $uri => $meta) {
         $parts = explode('/', $uri);
         $pub_key = $parts[0] ?? '';
 
-        // Replace the date key loader loop in render_home() with this:
         $month_num = intval($parts[2] ?? 0);
         $year_val = htmlspecialchars($parts[1] ?? '');
         $month_name = $month_num ? date("F", mktime(0, 0, 0, $month_num, 10)) : '';
+
+        // --- NEW: Dynamic Per-Article data.json Lookup ---
+        $summary = null;
+        $target_file = $articles_base . '/' . $uri;
+        $dir = dirname($target_file);
+        $data_json_path = $dir . '/data.json';
+
+        if (file_exists($data_json_path)) {
+            $json = json_decode(file_get_contents($data_json_path), true);
+            $summary = $json['summary'] ?? null;
+        }
+        // -------------------------------------------------
 
         $links[] = [
             'uri' => $uri,
             'title' => $meta['title'],
             'pub' => $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key)),
-            'date' => trim("$month_name $year_val")
+            'date' => trim("$month_name $year_val"),
+            'summary' => $summary // Sent down to the view!
         ];
     }
 

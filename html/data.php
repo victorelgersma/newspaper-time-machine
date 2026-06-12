@@ -6,6 +6,41 @@ $base_dir = "/var/www/vjbe.net/html";
 $articles_base = $base_dir . "/oldnews-articles-only";
 $photos_base = "https://oldnews-photos.vjbe.net/";
 
+function get_dynamic_articles($base_dir = 'oldnews-articles-only') {
+    $articles = [];
+
+    // Check if the directory exists to avoid errors
+    if (!is_dir($base_dir)) {
+        return $articles;
+    }
+
+    // Scan the top-level directory and remove tracking pointers (. and ..)
+    $folders = array_diff(scandir($base_dir), array('.', '..'));
+
+    foreach ($folders as $folder) {
+        $folder_path = $base_dir . '/' . $folder;
+        $json_path = $folder_path . '/data.json';
+
+        // Only process if it's a directory and contains a data.json file
+        if (is_dir($folder_path) && file_exists($json_path)) {
+            $json_content = file_get_contents($json_path);
+            $metadata = json_decode($json_content, true);
+
+            if ($metadata) {
+                // Use the folder name as the unique array key (slug)
+                $articles[$folder] = [
+                    'title'       => $metadata['title'] ?? 'Untitled Article',
+                    'date'        => $metadata['date'] ?? 'Unknown Date',
+                    'author'      => $metadata['author'] ?? 'Anonymous',
+                    'image'       => $metadata['image'] ?? 'photocopy.jpg', // Default fallback
+                    'folder_path' => $folder_path // Useful for rendering the image/transcription later
+                ];
+            }
+        }
+    }
+
+    return $articles;
+}
 $publications = [
     'liverpool_mercury' => 'Liverpool Mercury',
     'manchester_guardian' => 'The Manchester Guardian',

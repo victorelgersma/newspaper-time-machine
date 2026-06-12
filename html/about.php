@@ -26,7 +26,7 @@ highly encouraged. Prospective contributors are welcome to open a pull
 request <a
 href="https://github.com/victorelgersma/oldnews-OCR-pipeline">on our
 repository</a> or reach out directly via email at <a
-href="mailto:victor.elgersma@students.uu.nl">victor.elgersma@students.uu.nl</a>
+href="mailto:v.j.b.elgersma@students.uu.nl">v.j.b.elgersma@students.uu.nl</a>
 with submissions or dataset additions.</p>
 <h2 id="source-verification">Source Verification</h2>
 <p>Every transcription hosted on this site maintains a direct link back
@@ -34,6 +34,9 @@ to its material reference point. By utilizing the <strong>‘View
 Source’</strong> button on any given entry, you can immediately review
 original photocopy clippings hosted by our image repository or visit
 their permanent records, such as at the British Newspaper Archive.</p>
-<h2 id="creation">Creation</h2>
-<p>This project was made by <a href="https://vjbe.net">Victor
-Elgersma</a></p>
+<h2 id="source-websites">Source Websites</h2>
+<p>We use the following sites to source our newspaper articles:</p>
+<ul>
+<li><a href="https://www.britishnewspaperarchive.co.uk/">The British
+Newspaper Archive</a></li>
+</ul>

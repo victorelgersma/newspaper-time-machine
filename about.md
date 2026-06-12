@@ -18,6 +18,9 @@ Contributions, data parsing improvements, and text corrections are highly encour
 
 Every transcription hosted on this site maintains a direct link back to its material reference point. By utilizing the **'View Source'** button on any given entry, you can immediately review original photocopy clippings hosted by our image repository or visit their permanent records, such as at the British Newspaper Archive.
 
-## Creation
 
-This project was made by [Victor Elgersma](https://vjbe.net)
+## Source Websites
+
+We use the following sites to source our newspaper articles:
+
+- [The British Newspaper Archive](https://www.britishnewspaperarchive.co.uk/)
