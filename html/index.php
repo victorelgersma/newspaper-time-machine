@@ -22,14 +22,14 @@ if ($clean_uri === "about") {
     $day_name = "";
     $day_num = "";
     $date_str = "";
-    $photo_link = "/"; 
+    $photo_link = "/";
     $is_about_page = true;
 
     ob_start();
-    include('about.php');
+    include(__DIR__ . '/about.php');
     $content = ob_get_clean();
 
-    include('layout.php');
+    include(__DIR__ . '/layout.php');
     exit;
 }
 
@@ -46,15 +46,17 @@ if (strpos($clean_uri, 'photocopy/') === 0) {
     }
 
     $_GET['uri'] = $uri;
-    include('photocopy.php');
+    include(__DIR__ . '/photocopy.php');
     exit;
 }
 
-// 4. Article Route
-// Switch section #4 in index.php to a strict whitelist check
+// 4. Flat Article Route
 if (array_key_exists($clean_uri, $metadata)) {
     $target_file = $articles_base . '/' . $clean_uri;
-    $real_target = realpath($target_file);
+
+    // Dynamically look for any compilation html file inside your custom folder name
+    $html_files = glob($target_file . '/*.html');
+    $real_target = !empty($html_files) ? realpath($html_files[0]) : false;
     $real_base = realpath($articles_base);
 
     if ($real_target !== false && strpos($real_target, $real_base) === 0 && is_file($real_target)) {
@@ -71,123 +73,105 @@ render_404();
 
 // ---- Render Functions ----
 
-function render_article($uri, $full_path) {
+function render_article($uri, $full_path)
+{
     global $metadata, $publications;
 
     $view_count = get_and_increment_page_views($uri);
+    $meta = $metadata[$uri];
 
-    $meta = $metadata[$uri] ?? ['title' => basename($uri, '.html')];
-    $parts = explode('/', $uri);
+    $title = $meta['title'];
+    $pub_key = $meta['pub_key'];
+    $pub_name = $publications[$pub_key] ?? (!empty($pub_key) ? ucfirst(str_replace('_', ' ', $pub_key)) : 'Archive Entry');
 
-    $title = $meta['title'] ?? basename($uri, '.html');
-    $pub_key = $parts[0] ?? '';
-    $pub_name = $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key));
-    $day_name = $meta['day_name'] ?? '';
-    $day_num = $meta['day_num'] ?? '';
-    $date_str = ($meta['day_num'] ?? '') . '/' . ($parts[2] ?? '') . '/' . ($parts[1] ?? '');
-    $source_url = $meta['source_url'] ?? null;
+    // Explicit clean fallback for the layout subtitle
+    $date_str = (!empty($meta['date']) && $meta['date'] !== '//') ? $meta['date'] : 'Undated';
     $photo_link = "/photocopy/" . $uri;
 
-
-    $dir = dirname($full_path);
-    $data_json_path = $dir . '/data.json';
-    $summary = null;
-    if (file_exists($data_json_path)) {
-        $json = json_decode(file_get_contents($data_json_path), true);
-        $summary = $json['summary'] ?? null;
-    }
-
     $content = file_get_contents($full_path);
-    include('layout.php');
+    include(__DIR__ . '/layout.php');
 }
 
-function render_home() {
-    global $site_name, $metadata, $publications, $articles_base;
+function render_home()
+{
+    global $site_name, $metadata, $publications, $articles_base, $links;
 
     $view_count = get_and_increment_page_views('home');
+    $links = []; 
 
-    $links = [];
     foreach ($metadata as $uri => $meta) {
-        $parts = explode('/', $uri);
-        $pub_key = $parts[0] ?? '';
+        $pub_key = $meta['pub_key'] ?? 'NOT SET';
 
-        $month_num = intval($parts[2] ?? 0);
-        $year_val = htmlspecialchars($parts[1] ?? '');
-        $month_name = $month_num ? date("F", mktime(0, 0, 0, $month_num, 10)) : '';
-
-        // --- NEW: Dynamic Per-Article data.json Lookup ---
+        // Grab summary out of directory json if it exists
         $summary = null;
-        $target_file = $articles_base . '/' . $uri;
-        $dir = dirname($target_file);
-        $data_json_path = $dir . '/data.json';
-
+        $data_json_path = $articles_base . '/' . $uri . '/data.json';
+        $json_file_status = file_exists($data_json_path) ? "FOUND" : "NOT FOUND";
+        
+        $json_decode_status = "N/A";
         if (file_exists($data_json_path)) {
-            $json = json_decode(file_get_contents($data_json_path), true);
-            $summary = $json['summary'] ?? null;
+            $raw_body = file_get_contents($data_json_path);
+            $json = json_decode($raw_body, true);
+            if ($json === null) {
+                $json_decode_status = "FAILED (Syntax Error in JSON)";
+            } else {
+                $json_decode_status = "SUCCESS";
+                $summary = $json['summary'] ?? null;
+            }
         }
-        // -------------------------------------------------
+
+        // Clean date assignment matching data.php parsing
+        $display_date = (!empty($meta['date']) && $meta['date'] !== '//') ? $meta['date'] : 'Undated';
+        
+        $resolved_pub = $publications[$pub_key] ?? (!empty($pub_key) ? ucfirst(str_replace('_', ' ', $pub_key)) : 'Archive Entry');
+        $sort_date = $meta['sort_date'] ?? '0000-00-00';
 
         $links[] = [
             'uri' => $uri,
-            'title' => $meta['title'],
-            'pub' => $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key)),
-            'date' => trim("$month_name $year_val"),
-            'summary' => $summary // Sent down to the view!
+            'title' => $meta['title'] ?? 'Untitled Article',
+            'pub' => $resolved_pub,
+            'date' => $display_date,
+            'summary' => $summary,
+            'sort_date' => $sort_date
         ];
     }
 
-    // Stable Chronological Sorting (Oldest First)
+    // Clean stable chronological sorting
     usort($links, function ($a, $b) {
-        $get_date = function($uri) {
-            if (preg_match('/\/(\d{4})\/(\d{2})\/(\d{2})\//', $uri, $m)) {
-                return "{$m[1]}-{$m[2]}-{$m[3]}";
-            }
-            if (preg_match('/\/(\d{4})\/(\d{2})\//', $uri, $m)) {
-                return "{$m[1]}-{$m[2]}-01";
-            }
-            if (preg_match('/\/(\d{4})\//', $uri, $m)) {
-                return "{$m[1]}-01-01";
-            }
-            return "0000-00-00"; 
-        };
-
-        return strcmp($get_date($a['uri']), $get_date($b['uri']));
+        return strcmp($a['sort_date'], $b['sort_date']);
     });
 
-    include('home.php');
+
+    include(__DIR__ . '/home.php');
 }
 
-function render_404() {
+function render_404()
+{
     global $site_name;
     $title = "404 Not Found";
     $pub_name = $site_name;
     $day_name = $day_num = $date_str = "";
     $photo_link = "/";
     $content = "<p>We are sorry, but that piece doesn't exist in the archive yet.</p>";
-    include('layout.php');
+    include(__DIR__ . '/layout.php');
 }
 
-function render_pending_transcription($uri) {
+function render_pending_transcription($uri)
+{
     global $metadata, $publications;
 
-    $meta = $metadata[$uri] ?? ['title' => 'Pending Article'];
-    $parts = explode('/', $uri);
-
+    $meta = $metadata[$uri];
     $title = $meta['title'];
-    $pub_key = $parts[0] ?? '';
-    $pub_name = $publications[$pub_key] ?? ucfirst(str_replace('_', ' ', $pub_key));
-    $day_name = $meta['day_name'] ?? '';
-    $day_num = $meta['day_num'] ?? '';
-    $date_str = ($meta['day_num'] ?? '') . '/' . ($parts[2] ?? '') . '/' . ($parts[1] ?? '');
-// Outputs: 22/07/1837
+    $pub_key = $meta['pub_key'];
+    $pub_name = $publications[$pub_key] ?? (!empty($pub_key) ? ucfirst(str_replace('_', ' ', $pub_key)) : 'Archive Entry');
+    $date_str = (!empty($meta['date']) && $meta['date'] !== '//') ? $meta['date'] : 'Undated';
     $photo_link = "/photocopy/" . $uri;
 
     $content = "
         <div style='background: #fff4e6; border: 1px solid #ffd8a8; padding: 1.5rem; border-radius: 4px; color: #d9480f;'>
-            <h3 style='margin-top:0;'>Transcription Pending</h3>
+            <h3>Transcription Pending</h3>
             <p>The text for this article is still processing in our digital humanities pipeline.</p>
             <p>Click <strong>'View Source'</strong> above to look at the original print clippings.</p>
         </div>";
 
-    include('layout.php');
+    include(__DIR__ . '/layout.php');
 }

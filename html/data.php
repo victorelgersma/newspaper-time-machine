@@ -1,119 +1,56 @@
 <?php
-// data.php
+// ./html/data.php
 
 $site_name = "Old News";
-$base_dir = "/var/www/vjbe.net/html"; 
-$articles_base = $base_dir . "/oldnews-articles-only";
-$photos_base = "https://oldnews-photos.vjbe.net/";
 
-function get_dynamic_articles($base_dir = 'oldnews-articles-only') {
-    $articles = [];
+// Option B: If oldnews-articles-only is NEXT TO the html/ folder (one level up)
+$articles_base = dirname(__DIR__) . '/oldnews-articles-only';
 
-    // Check if the directory exists to avoid errors
-    if (!is_dir($base_dir)) {
-        return $articles;
-    }
+$publications = [
+    'the_liberator'      => 'The Liberator',
+    'boston_pilot'       => 'The Boston Pilot',
+    'sussex-advertiser'  => 'Sussex Advertiser'
+];
 
-    // Scan the top-level directory and remove tracking pointers (. and ..)
-    $folders = array_diff(scandir($base_dir), array('.', '..'));
+$metadata = [];
 
-    foreach ($folders as $folder) {
-        $folder_path = $base_dir . '/' . $folder;
-        $json_path = $folder_path . '/data.json';
+if (is_dir($articles_base)) {
+    $items = array_diff(scandir($articles_base), ['.', '..']);
+    
+    foreach ($items as $item) {
+        $item_path = $articles_base . '/' . $item;
+        
+        if (is_dir($item_path)) {
+            $json_file = $item_path . '/data.json';
+            
+            if (file_exists($json_file)) {
+                // Fetch content and trim any invisible trailing whitespace or structural anomalies
+                $raw_json = trim(file_get_contents($json_file));
+                $json_data = json_decode($raw_json, true);
+                
+                if ($json_data) {
+                    $year  = $json_data['year'] ?? '0000';
+                    $month = $json_data['month'] ?? '00';
+                    $day   = $json_data['day'] ?? '00';
+                    
+                    $display_date = "$day/$month/$year";
+                    $sort_date    = "$year-$month-$day";
 
-        // Only process if it's a directory and contains a data.json file
-        if (is_dir($folder_path) && file_exists($json_path)) {
-            $json_content = file_get_contents($json_path);
-            $metadata = json_decode($json_content, true);
-
-            if ($metadata) {
-                // Use the folder name as the unique array key (slug)
-                $articles[$folder] = [
-                    'title'       => $metadata['title'] ?? 'Untitled Article',
-                    'date'        => $metadata['date'] ?? 'Unknown Date',
-                    'author'      => $metadata['author'] ?? 'Anonymous',
-                    'image'       => $metadata['image'] ?? 'photocopy.jpg', // Default fallback
-                    'folder_path' => $folder_path // Useful for rendering the image/transcription later
-                ];
+                    $metadata[$item] = [
+                        'title'      => $json_data['title'] ?? 'Untitled Article',
+                        'day_name'   => '', 
+                        'day_num'    => $day,
+                        'source_url' => $json_data['source_url'] ?? null,
+                        'date'       => $display_date,
+                        'sort_date'  => $sort_date,
+                        'pub_key'    => $json_data['newspaper'] ?? '',
+                        'summary'    => $json_data['summary'] ?? '',
+                        
+                        // FIX: Explicitly save the dynamic root-relative link here!
+                        'link'       => '/' . $item 
+                    ];
+                }
             }
         }
     }
-
-    return $articles;
 }
-$publications = [
-    'liverpool_mercury' => 'Liverpool Mercury',
-    'manchester_guardian' => 'The Manchester Guardian',
-    'spectator' => 'The Spectator',
-    'examiner' => 'The Examiner',
-    'dublin_evening_post' => 'Dublin Evening Post',
-    'atlas' => 'The Atlas',
-    'edinburgh_evening_post_and_scottish_standard' => 'Edinburgh Evening Post',
-    'waterford_chronicle' => 'Waterford Chronicle'
-];
-
-$metadata = [
-    'spectator/1837/07/nichol-s-architecture-of-the-heavens.html' => [
-        'title' => "Dr. Nichol's Architecture of the Heavens.",
-        'summary' => "A review of Dr. Nichol's popularization of Herschel's astronomical discoveries, exploring the 'Architecture' of the Milky Way and the nebular hypothesis.",
-        'day_num' => '22',
-        'source_url' => "https://archive.spectator.co.uk/article/22nd-july-1837/17/dr-nichols-architecture-of-the-heavens"
-    ],
-     'examiner/1840/06/preparations-war-china.html' => [
-        'title' => "The Preparations For War in China",
-        "day_num" => "14",
-        "source_url" => "https://www.britishnewspaperarchive.co.uk/viewer/BL/0000054/18400614/001/0001?browse=true"
-    ],
-     'examiner/1840/06/bane-antidote.html' => [
-        'title' => "The Bane and the Antidote",
-        "day_num" => "14",
-        "source_url" => "https://www.britishnewspaperarchive.co.uk/viewer/BL/0000054/18400614/001/0001?browse=true"
-    ],
-     'examiner/1840/06/attempt-queen.html' => [
-        'title' => "The Attempt on the Queen's Life",
-        "day_num" => "14",
-        "source_url" => "https://www.britishnewspaperarchive.co.uk/viewer/BL/0000054/18400614/001/0001?browse=true"
-    ],
-     'examiner/1840/03/election_news.html' => [
-        'title' => "Election News",
-        "day_num" => "8",
-        "source_url" => "https://www.britishnewspaperarchive.co.uk/viewer/bl/0000054/18400308/008/0010"
-    ],
-     'examiner/1844/11/vestiges.html' => [
-        'title' => "Vestiges of the Natural History of Creation",
-        "day_num" => "9",
-        "source_url" => "https://www.britishnewspaperarchive.co.uk/viewer/BL/0000054/18441109/003/0002?browse=true&fullscreen=true"
-    ],
-     'dublin_evening_post/1845/05/vestiges.html' => [
-        'title' => "Professor Nichol",
-        "day_num" => "17",
-        "source_url" => "https://www.britishnewspaperarchive.co.uk/viewer/bl/0000435/18450517/035/0003"
-    ],
-    'liverpool_mercury/1845/10/readership.html' => [
-        'title' => 'Mercury Extraordinary!',
-        'day_num' => '03',
-        'day_name' => 'Friday',
-        'source_url' => "https://britishnewspaperarchive.co.uk/viewer/bl/0000081/18451017/005/0001"
-    ],
-    'liverpool_mercury/1845/10/vestiges-sedgwick-review-of-review.html' => [
-        'title' => 'The Edinburgh Review, and Vestiges of the Natural History of Creation',
-        'day_num' => '03',
-        'day_name' => 'Friday',
-        'source_url' => "https://britishnewspaperarchive.co.uk/viewer/bl/0000081/18451017/005/0001"
-    ],
-    'atlas/1845/12/explanations-review.html' => [
-        'title' => "Review of New Books: Explanations: a Sequel to \"Vestiges of the Natural History of Creation\" By the Author of that Work. Churchill. London, 1845",
-        "day_num" => "20",
-        "source_url" => "https://www.findmypast.co.uk/image-viewer?issue=BL%2F0002115%2F18451220&page=1&fulfillmentTypeKey=4000&record-id=BL%2F0002115%2F18451220%2F006"
-    ],
-    'edinburgh_evening_post_and_scottish_standard/1846/01/vestiges.html' => [
-        'title' => "Vestiges of the Natural History of Creation",
-        "day_num" => "10",
-        "source_url" => "https://www.britishnewspaperarchive.co.uk/viewer/bl/0001177/18460110/033/0003"
-    ],
-    'waterford_chronicle/1846/05/review-vestiges.html' => [
-        'title' => "Vestiges of the Natural History of Creation - Avowed Infidelity",
-        "day_num" => "20",
-        "source_url" => "https://www.britishnewspaperarchive.co.uk/viewer/bl/0000838/18460520/005/0001"
-    ],
-];

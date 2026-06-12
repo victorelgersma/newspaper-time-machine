@@ -55,25 +55,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($links as $link): ?>
+
+                        <?php
+                        foreach ($metadata as $slug => $article):
+                            // Cross-reference the data.json 'pub_key' against your $publications map
+                            $pub_key = $article['pub_key'] ?? '';
+                            $display_pub = $publications[$pub_key] ?? ucwords(str_replace(['_', '-'], ' ', $pub_key));
+                            ?>
                             <tr style="border-bottom: 1px solid #eee; vertical-align: top;">
                                 <td style="padding: 1rem 0.75rem;">
-                                    <span class="pub-tag"><?= htmlspecialchars($link['pub']) ?></span><br>
-                                    <span class="date-tag"><?= htmlspecialchars($link['date']) ?></span>
+                                    <span class="pub-tag"><?= htmlspecialchars($display_pub) ?></span><br>
+                                    <span class="date-tag"><?= htmlspecialchars($article['date']) ?></span>
                                 </td>
 
                                 <td style="padding: 1rem 0.75rem;">
-                                    <a href="/<?= htmlspecialchars($link['uri']) ?>" style="font-weight: 700;">
-                                        <?= htmlspecialchars($link['title']) ?>
+                                    <!-- Changed from $link['uri'] to use the flat array folder key ($slug) -->
+                                    <a href="/<?= htmlspecialchars($slug) ?>" style="font-weight: 700;">
+                                        <?= htmlspecialchars($article['title']) ?>
                                     </a>
                                 </td>
 
                                 <td style="padding: 1rem 0.75rem; font-size: 1.15rem; color: #ddd; line-height: 1.6;">
-                                    <?php if (!empty($link['summary'])): ?>
-                                        <?= htmlspecialchars($link['summary']) ?>
+                                    <?php if (!empty($article['summary'])): ?>
+                                        <?= htmlspecialchars($article['summary']) ?>
                                     <?php else: ?>
                                         <span style="color: #999; font-style: italic; font-size: 0.95rem;">
-                                                The summary for this article has not been written yet. 
+                                            The summary for this article has not been written yet.
                                         </span>
                                     <?php endif; ?>
                                 </td>
