@@ -43,7 +43,7 @@
         </header>
 
         <section style="width: 100%; max-width: 1200px;">
-            <h2>Archived Journalism Catalog</h2>
+            <h2>Full Catalogue</h2>
 
             <div class="table-wrapper">
                 <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem; text-align: left;">
@@ -56,25 +56,19 @@
                     </thead>
                     <tbody>
 
-                        <?php
-                        foreach ($metadata as $slug => $article):
-                            // Cross-reference the data.json 'pub_key' against your $publications map
-                            $pub_key = $article['pub_key'] ?? '';
-                            $display_pub = $publications[$pub_key] ?? ucwords(str_replace(['_', '-'], ' ', $pub_key));
+                        <?php foreach ($links as $article):
+                            $slug = $article['uri'];
                             ?>
                             <tr style="border-bottom: 1px solid #eee; vertical-align: top;">
                                 <td style="padding: 1rem 0.75rem;">
-                                    <span class="pub-tag"><?= htmlspecialchars($display_pub) ?></span><br>
+                                    <span class="pub-tag"><?= htmlspecialchars($article['pub']) ?></span><br>
                                     <span class="date-tag"><?= htmlspecialchars($article['date']) ?></span>
                                 </td>
-
                                 <td style="padding: 1rem 0.75rem;">
-                                    <!-- Changed from $link['uri'] to use the flat array folder key ($slug) -->
                                     <a href="/<?= htmlspecialchars($slug) ?>" style="font-weight: 700;">
                                         <?= htmlspecialchars($article['title']) ?>
                                     </a>
                                 </td>
-
                                 <td style="padding: 1rem 0.75rem; font-size: 1.15rem; color: #ddd; line-height: 1.6;">
                                     <?php if (!empty($article['summary'])): ?>
                                         <?= htmlspecialchars($article['summary']) ?>
