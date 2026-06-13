@@ -176,6 +176,7 @@ function render_article($uri, $full_path) {
     $date_str = (!empty($meta['date']) && $meta['date'] !== '//') ? $meta['date'] : 'Undated';
     $photo_link = "/photocopy/" . $uri;
 
+    $article_header_partial = __DIR__ . '/partials/article_header.php';
     $content = file_get_contents($full_path);
     include(__DIR__ . '/layout.php');
 }

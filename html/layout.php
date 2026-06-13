@@ -22,17 +22,19 @@
 <body>
     <article>
         <header>
-            <h1><a href="/" class="no-tufte-underline"><?= htmlspecialchars($site_name) ?></a></h1>
+            <h1>
+                <a href="/" class="no-tufte-underline">
+                    <?= htmlspecialchars($site_name) ?>
+                </a>
+            </h1>
+
             <?php include __DIR__ . '/partials/topnav.php'; ?>
 
-            <?php if (!isset($is_about_page)): ?>
-                <p class="subtitle">
-                    <?= htmlspecialchars($pub_name) ?> — <?= $date_str ?>
-                </p>
-                <nav>
-                    <a href="<?= $photo_link ?>" target="_blank">View Original</a>
-                </nav>
-            <?php endif; ?>
+            <?php
+            if (isset($article_header_partial)) {
+                include $article_header_partial;
+            }
+            ?>
         </header>
 
         <section>
