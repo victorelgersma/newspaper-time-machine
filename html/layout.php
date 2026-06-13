@@ -23,7 +23,6 @@
                     <?= htmlspecialchars($pub_name) ?> — <?= $date_str ?>
                 </p>
                 <nav>
-                    <a href="/catalogue">← Back to Catalogue</a> |
                     <a href="<?= $photo_link ?>" target="_blank">View Original</a>
                 </nav>
             <?php endif; ?>

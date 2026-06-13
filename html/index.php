@@ -30,10 +30,12 @@ if ($clean_uri === "about") {
     $is_about_page = true;
 
     ob_start();
+    $current_page = 'about';
     include(__DIR__ . '/about.php');
     $content = ob_get_clean();
 
     include(__DIR__ . '/layout.php');
+
     exit;
 }
 
@@ -151,6 +153,7 @@ function render_home() {
         $featured_article = $all_articles[0]; 
     }
 
+    $current_page = 'home';
     include(__DIR__ . '/home.php');
 }
 
@@ -158,6 +161,7 @@ function render_catalogue() {
     global $site_name;
     $view_count = get_and_increment_page_views('catalogue');
     $links = get_compiled_links();
+    $current_page = 'catalogue';
     include(__DIR__ . '/catalogue.php');
 }
 

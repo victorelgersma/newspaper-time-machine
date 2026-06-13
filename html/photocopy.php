@@ -21,23 +21,23 @@ $photos_url_base = "https://oldnews-photos.vjbe.net";
 $images = [];
 if (is_dir($local_photo_path)) {
     $files = scandir($local_photo_path);
-    
+
     // Group files by their base name to manage format prioritization
     // e.g., $groups['page_1'] = ['webp' => true, 'png' => true]
     $file_groups = [];
-    
+
     foreach ($files as $file) {
         if ($file !== '.' && $file !== '..' && preg_match('/^(.*)\.(webp|png|jpg|jpeg)$/i', $file, $matches)) {
             $base_name = $matches[1];
             $extension = strtolower($matches[2]);
-            
+
             if (!isset($file_groups[$base_name])) {
                 $file_groups[$base_name] = [];
             }
             $file_groups[$base_name][$extension] = $file;
         }
     }
-    
+
     // Resolve which format to show for each unique image base name
     foreach ($file_groups as $base_name => $extensions) {
         if (isset($extensions['webp'])) {
@@ -50,7 +50,7 @@ if (is_dir($local_photo_path)) {
             // Fallback to JPG/JPEG
             $chosen_file = $extensions['jpg'] ?? $extensions['jpeg'];
         }
-        
+
         $images[] = rtrim($photos_url_base, '/') . '/' . $folder_name . '/' . $chosen_file;
     }
 }
@@ -59,6 +59,7 @@ if (is_dir($local_photo_path)) {
 <html lang="en">
 
 <head>
+    <link rel="preconnect" href="https://oldnews-photos.vjbe.net">
     <meta charset="UTF-8">
     <title>Photocopy Viewer | <?= htmlspecialchars($folder_name) ?></title>
     <link rel="stylesheet" href="https://oldnews.vjbe.net/style/tufte.min.css">
@@ -118,8 +119,9 @@ if (is_dir($local_photo_path)) {
             <!-- <p style="font-size: 0.8rem;">Checked Disk Path: <code><?= htmlspecialchars($local_photo_path) ?></code></p> -->
         </div>
     <?php else: ?>
-        <?php foreach ($images as $img): ?>
-            <img src="<?= htmlspecialchars($img) ?>" alt="Original Newspaper Clipping">
+        <?php foreach ($images as $index => $img): ?>
+            <img src="<?= htmlspecialchars($img) ?>" alt="Original Newspaper Clipping"
+                loading="<?= $index < 2 ? 'eager' : 'lazy' ?>" fetchpriority="<?= $index === 0 ? 'high' : 'auto' ?>" decoding="async">
         <?php endforeach; ?>
     <?php endif; ?>
 </body>

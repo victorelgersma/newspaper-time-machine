@@ -58,6 +58,34 @@
             letter-spacing: 0.05em;
             font-size: 1rem;
         }
+
+        .featured-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .featured-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 2rem;
+            border-radius: 6px;
+            margin-top: 2rem;
+            transition:
+                border-color 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .featured-card-link:hover .featured-card {
+            border-color: #777;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .featured-card-link:hover h3 {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -69,36 +97,40 @@
         </header>
 
         <section style="max-width: 1200px; width:100%;">
-            <h2>From Today's Archive Selection</h2>
+            <h2>Featured Article</h2>
 
             <?php if ($featured_article): ?>
-                <div class="featured-card">
-                    <div class="tag-row">
-                        Featured Entry • <strong><?= htmlspecialchars($featured_article['pub']) ?></strong> —
-                        <?= htmlspecialchars($featured_article['date']) ?>
-                    </div>
+                <a href="/<?= htmlspecialchars($featured_article['uri']) ?>" class="featured-card-link">
 
-                    <div class="featured-flex">
-                        <?php if (!empty($featured_article['image'])): ?>
-                            <div class="featured-image-pane">
-                                <a href="/<?= htmlspecialchars($featured_article['uri']) ?>">
+                    <div class="featured-card">
+                        <div class="tag-row">
+                            <strong><?= htmlspecialchars($featured_article['pub']) ?></strong> —
+                            <?= htmlspecialchars($featured_article['date']) ?>
+                        </div>
+
+                        <div class="featured-flex">
+                            <?php if (!empty($featured_article['image'])): ?>
+                                <div class="featured-image-pane">
                                     <img src="<?= htmlspecialchars($featured_article['image']) ?>"
                                         alt="Clipping preview snippet">
-                                </a>
-                            </div>
-                        <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
 
-                        <div class="featured-text-pane">
-                            <h3 style="margin-top:0;"><a
-                                    href="/<?= htmlspecialchars($featured_article['uri']) ?>"><?= htmlspecialchars($featured_article['title']) ?></a>
-                            </h3>
-                            <p style="font-size: 1.2rem; line-height: 1.6;">
-                                <?= !empty($featured_article['summary']) ? htmlspecialchars($featured_article['summary']) : "No transcription breakdown available yet for this historic item." ?>
-                            </p>
-                            <p><a href="/<?= htmlspecialchars($featured_article['uri']) ?>" style="font-weight:bold;">Read →</a></p>
+                            <div class="featured-text-pane">
+                                <h3 style="margin-top:0;">
+                                    <?= htmlspecialchars($featured_article['title']) ?>
+                                </h3>
+
+                                <p style="font-size: 1.2rem; line-height: 1.6;">
+                                    <?= !empty($featured_article['summary'])
+                                        ? htmlspecialchars($featured_article['summary'])
+                                        : "No transcription breakdown available yet for this historic item." ?>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                </a>
             <?php else: ?>
                 <p>No documents currently discovered inside the local data repository pipeline blocks.</p>
             <?php endif; ?>

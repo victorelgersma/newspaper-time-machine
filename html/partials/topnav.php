@@ -1,20 +1,25 @@
 <?php
-$current = $current_page ?? '';
+$path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+
+$current =
+    $path === '' ? 'home' :
+    ($path === 'about' ? 'about' :
+    ($path === 'catalogue' ? 'catalogue' : ''));
 ?>
 
 <nav style="margin-bottom: 2rem;">
     <a href="/"
-       <?= $current === 'home' ? 'style="font-weight:bold;"' : '' ?>>
+       class="<?= $current === 'home' ? 'tufte-underline' : 'hover-tufte-underline no-tufte-underline' ?>">
         Home
     </a> |
 
     <a href="/about"
-       <?= $current === 'about' ? 'style="font-weight:bold;"' : '' ?>>
+       class="<?= $current === 'about' ? 'tufte-underline' : 'hover-tufte-underline no-tufte-underline' ?>">
         About
     </a> |
 
     <a href="/catalogue"
-       <?= $current === 'catalogue' ? 'style="font-weight:bold;"' : '' ?>>
+       class="<?= $current === 'catalogue' ? 'tufte-underline' : 'hover-tufte-underline no-tufte-underline' ?>">
         Catalogue
     </a>
 </nav>
