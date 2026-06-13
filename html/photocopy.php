@@ -106,7 +106,6 @@ if (is_dir($local_photo_path)) {
 
 <body>
     <div class="controls">
-        <a href="/<?= htmlspecialchars($uri) ?>">← Back to Article</a>
         <?php if ($source_url): ?>
             | <a href="<?= htmlspecialchars($source_url) ?>" target="_blank" class="source-link">British Newspaper Archive
                 ↗</a>
