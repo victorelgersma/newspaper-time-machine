@@ -33,6 +33,11 @@
         </header>
 
         <section style="width: 100%; max-width: 1200px;">
+            <p class="sans" style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+                Archive contains
+                <strong><?= number_format(count($links)) ?></strong>
+                digitized articles.
+            </p>
             <div class="table-wrapper">
                 <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem; text-align: left;">
                     <thead>

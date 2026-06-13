@@ -1,6 +1,7 @@
 <!-- ./html/layout.php -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($title) ?> | <?= htmlspecialchars($pub_name) ?></title>
@@ -8,16 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        body { padding: 2rem; }
-        header { margin-bottom: 3rem; }
+        body {
+            padding: 2rem;
+        }
+
+        header {
+            margin-bottom: 3rem;
+        }
     </style>
 </head>
+
 <body>
     <article>
         <header>
             <h1><a href="/" class="no-tufte-underline"><?= htmlspecialchars($site_name) ?></a></h1>
             <?php include __DIR__ . '/partials/topnav.php'; ?>
-            
+
             <?php if (!isset($is_about_page)): ?>
                 <p class="subtitle">
                     <?= htmlspecialchars($pub_name) ?> — <?= $date_str ?>
@@ -41,5 +48,38 @@
             </footer>
         <?php endif; ?>
     </article>
+    <script>
+        (function () {
+            const root = document.body;
+            const key = "oldnews-theme";
+
+            function applyTheme(theme) {
+                if (theme === "dark") {
+                    root.classList.add("theme-dark");
+                    root.classList.remove("theme-light");
+                } else {
+                    root.classList.add("theme-light");
+                    root.classList.remove("theme-dark");
+                }
+            }
+
+            // Load saved theme
+            const saved = localStorage.getItem(key);
+            applyTheme(saved || "light");
+
+            // Toggle button
+            const btn = document.getElementById("themeToggle");
+            if (btn) {
+                btn.addEventListener("click", function () {
+                    const isDark = root.classList.contains("theme-dark");
+                    const next = isDark ? "light" : "dark";
+
+                    localStorage.setItem(key, next);
+                    applyTheme(next);
+                });
+            }
+        })();
+    </script>
 </body>
+
 </html>
