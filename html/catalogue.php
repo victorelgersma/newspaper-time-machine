@@ -14,23 +14,20 @@
 
         .pub-tag {
             font-variant: small-caps;
-            color: #666;
             font-size: 0.9rem;
         }
 
         .date-tag {
-            color: #888;
             font-size: 0.8rem;
         }
     </style>
 </head>
 
 <body>
+    <header>
+        <?php include __DIR__ . '/partials/topnav.php'; ?>
+    </header>
     <article>
-        <header>
-            <h1>Old News</h1>
-            <?php include __DIR__ . '/partials/topnav.php'; ?>
-        </header>
 
         <section style="width: 100%; max-width: 1200px;">
             <p class="sans" style="font-size: 1.1rem; margin-bottom: 1.5rem;">
@@ -59,8 +56,8 @@
                                         <?= htmlspecialchars($article['title']) ?>
                                     </a>
                                 </td>
-                                <td style="padding: 1rem 0.75rem; font-size: 1.15rem; color: #ddd; line-height: 1.6;">
-                                    <?= !empty($article['summary']) ? htmlspecialchars($article['summary']) : '<span style="color: #999; font-style: italic; font-size: 0.95rem;">Pending transcription tracking details.</span>' ?>
+                                <td style="padding: 1rem 0.75rem; font-size: 1.15rem; line-height: 1.6;">
+                                    <?= !empty($article['summary']) ? htmlspecialchars($article['summary']) : '<span style="font-style: italic; font-size: 0.95rem;">Pending transcription tracking details.</span>' ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -71,8 +68,7 @@
 
         <?php if (isset($view_count)): ?>
             <footer>
-                <hr style="width: 100%; margin-top: 4rem;">
-                <p class="sans" style="font-size: 0.85rem; color: #777;">
+                <p class="sans" style="font-size: 0.85rem;">
                     Catalogue Index Explorations: <span class="numeral"><?= number_format($view_count) ?></span>
                 </p>
             </footer>

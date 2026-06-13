@@ -20,22 +20,17 @@
 </head>
 
 <body>
+    <header>
+
+        <?php include __DIR__ . '/partials/topnav.php'; ?>
+
+        <?php
+        if (isset($article_header_partial)) {
+            include $article_header_partial;
+        }
+        ?>
+    </header>
     <article>
-        <header>
-            <h1>
-                <a href="/" class="no-tufte-underline">
-                    <?= htmlspecialchars($site_name) ?>
-                </a>
-            </h1>
-
-            <?php include __DIR__ . '/partials/topnav.php'; ?>
-
-            <?php
-            if (isset($article_header_partial)) {
-                include $article_header_partial;
-            }
-            ?>
-        </header>
 
         <section>
             <?= $content ?>
@@ -43,8 +38,7 @@
 
         <?php if (isset($view_count)): ?>
             <footer>
-                <hr style="width: 100%; margin-top: 3rem;">
-                <p class="sans" style="font-size: 0.85rem; color: #777; text-align: right;">
+                <p class="sans" style="font-size: 0.85rem; text-align: right;">
                     Views: <span class="numeral"><?= number_format($view_count) ?></span>
                 </p>
             </footer>

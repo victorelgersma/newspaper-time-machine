@@ -67,8 +67,6 @@ if (is_dir($local_photo_path)) {
         body {
             padding: 2rem;
             text-align: center;
-            background-color: #151515;
-            color: #eee;
         }
 
         .controls {
@@ -86,18 +84,15 @@ if (is_dir($local_photo_path)) {
         }
 
         a {
-            color: #8cf;
             text-decoration: none;
             border-bottom: 1px solid #8cf;
         }
 
         .error-msg {
             margin-top: 5rem;
-            color: #777;
         }
 
         code {
-            color: #ff6b6b;
             background: #222;
             padding: 2px 5px;
         }
@@ -107,7 +102,7 @@ if (is_dir($local_photo_path)) {
 <body>
     <div class="controls">
         <?php if ($source_url): ?>
-            | <a href="<?= htmlspecialchars($source_url) ?>" target="_blank" class="source-link">British Newspaper Archive
+            <a href="<?= htmlspecialchars($source_url) ?>" target="_blank" class="source-link">Source
                 ↗</a>
         <?php endif; ?>
     </div>

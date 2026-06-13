@@ -7,6 +7,7 @@ $current =
         ($path === 'catalogue' ? 'catalogue' : ''));
 ?>
 
+<h1><?= htmlspecialchars($site_name) ?></h1>
 <nav style="margin-bottom: 2rem;">
     <a href="/" class="<?= $current === 'home' ? 'tufte-underline' : 'hover-tufte-underline no-tufte-underline' ?>">
         Home

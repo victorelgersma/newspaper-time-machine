@@ -205,7 +205,7 @@ function render_pending_transcription($uri)
     $photo_link = "/photocopy/" . $uri;
 
     $content = "
-        <div style='background: #fff4e6; border: 1px solid #ffd8a8; padding: 1.5rem; border-radius: 4px; color: #d9480f;'>
+        <div style='padding: 1.5rem; border-radius: 4px;'>
             <h3>Transcription Pending</h3>
             <p>The text for this article is still processing in our digital humanities pipeline.</p>
             <p>Click <strong>'View Original'</strong> above to look at the original print clippings.</p>
