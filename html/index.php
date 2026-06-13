@@ -5,17 +5,21 @@ require_once('counter.php');
 
 $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $clean_uri = ltrim($request_uri, '/');
-
-// Strict path sanitization to prevent directory traversal
 $clean_uri = str_replace(['../', '..\\'], '', $clean_uri);
 
-// 1. Home Route
+// 1. Home Route (Featured Article View)
 if ($clean_uri === "" || $clean_uri === "index.php") {
     render_home();
     exit;
 }
 
-// 2. About Page Route
+// 2. Catalogue Page Route
+if ($clean_uri === "catalogue") {
+    render_catalogue();
+    exit;
+}
+
+// 3. About Page Route
 if ($clean_uri === "about") {
     $title = "About | " . $site_name;
     $pub_name = $site_name;
@@ -33,7 +37,7 @@ if ($clean_uri === "about") {
     exit;
 }
 
-// 3. Photocopy Viewer Route
+// 4. Photocopy Viewer Route
 if (strpos($clean_uri, 'photocopy/') === 0) {
     $uri = str_replace('photocopy/', '', $clean_uri);
     $uri = ltrim($uri, '/');
@@ -50,11 +54,9 @@ if (strpos($clean_uri, 'photocopy/') === 0) {
     exit;
 }
 
-// 4. Flat Article Route
+// 5. Flat Article Route
 if (array_key_exists($clean_uri, $metadata)) {
     $target_file = $articles_base . '/' . $clean_uri;
-
-    // Dynamically look for any compilation html file inside your custom folder name
     $html_files = glob($target_file . '/*.html');
     $real_target = !empty($html_files) ? realpath($html_files[0]) : false;
     $real_base = realpath($articles_base);
@@ -73,57 +75,45 @@ render_404();
 
 // ---- Render Functions ----
 
-function render_article($uri, $full_path)
-{
-    global $metadata, $publications;
-
-    $view_count = get_and_increment_page_views($uri);
-    $meta = $metadata[$uri];
-
-    $title = $meta['title'];
-    $pub_key = $meta['pub_key'];
-    $pub_name = $publications[$pub_key] ?? (!empty($pub_key) ? ucfirst(str_replace('_', ' ', $pub_key)) : 'Archive Entry');
-
-    // Explicit clean fallback for the layout subtitle
-    $date_str = (!empty($meta['date']) && $meta['date'] !== '//') ? $meta['date'] : 'Undated';
-    $photo_link = "/photocopy/" . $uri;
-
-    $content = file_get_contents($full_path);
-    include(__DIR__ . '/layout.php');
-}
-
-function render_home()
-{
-    global $site_name, $metadata, $publications, $articles_base, $links;
-
-    $view_count = get_and_increment_page_views('home');
-    $links = []; 
+function get_compiled_links() {
+    global $metadata, $publications, $articles_base;
+    $links = [];
 
     foreach ($metadata as $uri => $meta) {
-        $pub_key = $meta['pub_key'] ?? 'NOT SET';
+        $pub_key = $meta['pub_key'] ?? '';
+        $summary = $meta['summary'] ?? null;
+        $featured = false;
+        $custom_cover = null;
 
-        // Grab summary out of directory json if it exists
-        $summary = null;
         $data_json_path = $articles_base . '/' . $uri . '/data.json';
-        $json_file_status = file_exists($data_json_path) ? "FOUND" : "NOT FOUND";
-        
-        $json_decode_status = "N/A";
         if (file_exists($data_json_path)) {
-            $raw_body = file_get_contents($data_json_path);
-            $json = json_decode($raw_body, true);
-            if ($json === null) {
-                $json_decode_status = "FAILED (Syntax Error in JSON)";
-            } else {
-                $json_decode_status = "SUCCESS";
-                $summary = $json['summary'] ?? null;
+            $json = json_decode(file_get_contents($data_json_path), true);
+            if ($json !== null) {
+                $summary = $json['summary'] ?? $summary;
+                $featured = $json['featured'] ?? false;
+                $custom_cover = $json['cover_image'] ?? null; // Optional override image
             }
         }
 
-        // Clean date assignment matching data.php parsing
         $display_date = (!empty($meta['date']) && $meta['date'] !== '//') ? $meta['date'] : 'Undated';
-        
         $resolved_pub = $publications[$pub_key] ?? (!empty($pub_key) ? ucfirst(str_replace('_', ' ', $pub_key)) : 'Archive Entry');
         $sort_date = $meta['sort_date'] ?? '0000-00-00';
+
+        // Automatically resolve clipping thumbnail fallback
+        $img_src = $custom_cover;
+        if (empty($img_src)) {
+            $folder_name = str_replace('.html', '', $uri);
+            $photo_dir = __DIR__ . "/oldnews-photos/" . $folder_name;
+            if (is_dir($photo_dir)) {
+                $files = scandir($photo_dir);
+                foreach ($files as $file) {
+                    if (preg_match('/\.(webp|png|jpg|jpeg)$/i', $file)) {
+                        $img_src = "https://oldnews-photos.vjbe.net/" . $folder_name . '/' . $file;
+                        break; // Grab the very first image frame discovered
+                    }
+                }
+            }
+        }
 
         $links[] = [
             'uri' => $uri,
@@ -131,19 +121,62 @@ function render_home()
             'pub' => $resolved_pub,
             'date' => $display_date,
             'summary' => $summary,
-            'sort_date' => $sort_date
+            'sort_date' => $sort_date,
+            'featured' => $featured,
+            'image' => $img_src
         ];
     }
 
-    // Clean stable chronological sorting
     usort($links, function ($a, $b) {
-        return strcmp($a['sort_date'], $b['sort_date']);
+        return strcmp($b['sort_date'], $a['sort_date']); // Newest items first
     });
 
+    return $links;
+}
+
+function render_home() {
+    global $site_name;
+    $view_count = get_and_increment_page_views('home');
+    $all_articles = get_compiled_links();
+
+    // Isolate the explicitly marked featured article. Fall back to newest item if none marked.
+    $featured_article = null;
+    foreach ($all_articles as $art) {
+        if ($art['featured'] === true) {
+            $featured_article = $art;
+            break;
+        }
+    }
+    if (!$featured_article && !empty($all_articles)) {
+        $featured_article = $all_articles[0]; 
+    }
 
     include(__DIR__ . '/home.php');
 }
 
+function render_catalogue() {
+    global $site_name;
+    $view_count = get_and_increment_page_views('catalogue');
+    $links = get_compiled_links();
+    include(__DIR__ . '/catalogue.php');
+}
+
+function render_article($uri, $full_path) {
+    global $metadata, $publications;
+    $view_count = get_and_increment_page_views($uri);
+    $meta = $metadata[$uri];
+
+    $title = $meta['title'];
+    $pub_key = $meta['pub_key'];
+    $pub_name = $publications[$pub_key] ?? (!empty($pub_key) ? ucfirst(str_replace('_', ' ', $pub_key)) : 'Archive Entry');
+    $date_str = (!empty($meta['date']) && $meta['date'] !== '//') ? $meta['date'] : 'Undated';
+    $photo_link = "/photocopy/" . $uri;
+
+    $content = file_get_contents($full_path);
+    include(__DIR__ . '/layout.php');
+}
+
+// Keep render_404 and render_pending_transcription functions identical to what you have...
 function render_404()
 {
     global $site_name;
@@ -170,7 +203,7 @@ function render_pending_transcription($uri)
         <div style='background: #fff4e6; border: 1px solid #ffd8a8; padding: 1.5rem; border-radius: 4px; color: #d9480f;'>
             <h3>Transcription Pending</h3>
             <p>The text for this article is still processing in our digital humanities pipeline.</p>
-            <p>Click <strong>'View Source'</strong> above to look at the original print clippings.</p>
+            <p>Click <strong>'View Original'</strong> above to look at the original print clippings.</p>
         </div>";
 
     include(__DIR__ . '/layout.php');

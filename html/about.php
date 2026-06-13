@@ -31,7 +31,7 @@ with submissions or dataset additions.</p>
 <h2 id="source-verification">Source Verification</h2>
 <p>Every transcription hosted on this site maintains a direct link back
 to its material reference point. By utilizing the <strong>‘View
-Source’</strong> button on any given entry, you can immediately review
+Original’</strong> button on any given entry, you can immediately review
 original photocopy clippings hosted by our image repository or visit
 their permanent records, such as at the British Newspaper Archive.</p>
 <h2 id="source-websites">Source Websites</h2>

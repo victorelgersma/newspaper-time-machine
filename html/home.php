@@ -1,9 +1,10 @@
+<!-- ./html/home.php -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title><?= htmlspecialchars($site_name) ?></title>
+    <title><?= htmlspecialchars($site_name) ?> | Preservation Archive</title>
     <link rel="stylesheet" href="https://oldnews.vjbe.net/style/tufte.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -11,24 +12,51 @@
             padding: 2rem;
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .featured-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 2rem;
+            border-radius: 6px;
+            margin-top: 2rem;
         }
 
-        li {
-            margin-bottom: 1.5rem;
+        @media (prefers-color-scheme: light) {
+            .featured-card {
+                background: #fcfcfc;
+                border: 1px solid #e0e0e0;
+            }
         }
 
-        .pub-tag {
+        .featured-flex {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .featured-image-pane {
+            flex: 1;
+            min-width: 280px;
+            max-width: 400px;
+        }
+
+        .featured-image-pane img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #444;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .featured-text-pane {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .tag-row {
             font-variant: small-caps;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .date-tag {
             color: #888;
-            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -37,65 +65,53 @@
     <article>
         <header>
             <h1><?= htmlspecialchars($site_name) ?></h1>
-            <nav>
-                <a href="/about">About</a>
-            </nav>
+            <?php include __DIR__ . '/partials/topnav.php'; ?>
         </header>
 
-        <section style="width: 100%; max-width: 1200px;">
-            <h2>Full Catalogue</h2>
+        <section style="max-width: 1200px; width:100%;">
+            <h2>From Today's Archive Selection</h2>
 
-            <div class="table-wrapper">
-                <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem; text-align: left;">
-                    <thead>
-                        <tr style="border-bottom: 2px solid #ccc;">
-                            <th style="padding: 0.75rem; font-size: 1.1rem; width: 20%;">Publication / Date</th>
-                            <th style="padding: 0.75rem; font-size: 1.1rem; width: 30%;">Article Title</th>
-                            <th style="padding: 0.75rem; font-size: 1.1rem; width: 50%;">Summary</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <?php if ($featured_article): ?>
+                <div class="featured-card">
+                    <div class="tag-row">
+                        Featured Entry • <strong><?= htmlspecialchars($featured_article['pub']) ?></strong> —
+                        <?= htmlspecialchars($featured_article['date']) ?>
+                    </div>
 
-                        <?php foreach ($links as $article):
-                            $slug = $article['uri'];
-                            ?>
-                            <tr style="border-bottom: 1px solid #eee; vertical-align: top;">
-                                <td style="padding: 1rem 0.75rem;">
-                                    <span class="pub-tag"><?= htmlspecialchars($article['pub']) ?></span><br>
-                                    <span class="date-tag"><?= htmlspecialchars($article['date']) ?></span>
-                                </td>
-                                <td style="padding: 1rem 0.75rem;">
-                                    <a href="/<?= htmlspecialchars($slug) ?>" style="font-weight: 700;">
-                                        <?= htmlspecialchars($article['title']) ?>
-                                    </a>
-                                </td>
-                                <td style="padding: 1rem 0.75rem; font-size: 1.15rem; color: #ddd; line-height: 1.6;">
-                                    <?php if (!empty($article['summary'])): ?>
-                                        <?= htmlspecialchars($article['summary']) ?>
-                                    <?php else: ?>
-                                        <span style="color: #999; font-style: italic; font-size: 0.95rem;">
-                                            The summary for this article has not been written yet.
-                                        </span>
-                                    <?php endif; ?>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
+                    <div class="featured-flex">
+                        <?php if (!empty($featured_article['image'])): ?>
+                            <div class="featured-image-pane">
+                                <a href="/<?= htmlspecialchars($featured_article['uri']) ?>">
+                                    <img src="<?= htmlspecialchars($featured_article['image']) ?>"
+                                        alt="Clipping preview snippet">
+                                </a>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="featured-text-pane">
+                            <h3 style="margin-top:0;"><a
+                                    href="/<?= htmlspecialchars($featured_article['uri']) ?>"><?= htmlspecialchars($featured_article['title']) ?></a>
+                            </h3>
+                            <p style="font-size: 1.2rem; line-height: 1.6;">
+                                <?= !empty($featured_article['summary']) ? htmlspecialchars($featured_article['summary']) : "No transcription breakdown available yet for this historic item." ?>
+                            </p>
+                            <p><a href="/<?= htmlspecialchars($featured_article['uri']) ?>" style="font-weight:bold;">Read →</a></p>
+                        </div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <p>No documents currently discovered inside the local data repository pipeline blocks.</p>
+            <?php endif; ?>
         </section>
 
-        <!-- Add Homepage Counter here -->
         <?php if (isset($view_count)): ?>
             <footer>
-                <hr style="width: 55%; margin-left: 0; margin-top: 4rem;">
+                <hr style="width: 55%; margin-left: 0; margin-top: 6rem;">
                 <p class="sans" style="font-size: 0.85rem; color: #777;">
-                    This archive has been explored by <span class="numeral"><?= number_format($view_count) ?></span> unique
-                    historical minds.
+                    Unique Visitors: <span class="numeral"><?= number_format($view_count) ?></span>
                 </p>
             </footer>
         <?php endif; ?>
-
     </article>
 </body>
 

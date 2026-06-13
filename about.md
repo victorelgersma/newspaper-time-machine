@@ -16,7 +16,7 @@ Contributions, data parsing improvements, and text corrections are highly encour
 
 ## Source Verification
 
-Every transcription hosted on this site maintains a direct link back to its material reference point. By utilizing the **'View Source'** button on any given entry, you can immediately review original photocopy clippings hosted by our image repository or visit their permanent records, such as at the British Newspaper Archive.
+Every transcription hosted on this site maintains a direct link back to its material reference point. By utilizing the **'View Original'** button on any given entry, you can immediately review original photocopy clippings hosted by our image repository or visit their permanent records, such as at the British Newspaper Archive.
 
 
 ## Source Websites
