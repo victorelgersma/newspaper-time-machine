@@ -62,10 +62,9 @@ if (is_dir($local_photo_path)) {
     <link rel="preconnect" href="https://oldnews-photos.vjbe.net">
     <meta charset="UTF-8">
     <title>Photocopy Viewer | <?= htmlspecialchars($folder_name) ?></title>
-    <link rel="stylesheet" href="https://oldnews.vjbe.net/style/tufte.min.css">
+    <link rel="stylesheet" href="https://oldnews.vjbe.net/style/tufte.css">
     <style>
         body {
-            padding: 2rem;
             text-align: center;
         }
 

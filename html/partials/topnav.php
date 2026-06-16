@@ -1,25 +1,51 @@
-<?php
-$path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-
-$current =
-    $path === '' ? 'home' :
-    ($path === 'about' ? 'about' :
-        ($path === 'catalogue' ? 'catalogue' : ''));
-?>
-
 <h1><?= htmlspecialchars($site_name) ?></h1>
-<nav style="margin-bottom: 2rem;">
-    <a href="/" class="<?= $current === 'home' ? 'tufte-underline' : 'hover-tufte-underline no-tufte-underline' ?>">
-        Home
-    </a> |
-    <a href="/catalogue"
-        class="<?= $current === 'catalogue' ? 'tufte-underline' : 'hover-tufte-underline no-tufte-underline' ?>">
-        Catalogue
-    </a> |
-    <a href="/about"
-        class="<?= $current === 'about' ? 'tufte-underline' : 'hover-tufte-underline no-tufte-underline' ?>">
-        About
-    </a>
+<p class="subtitle">Historic Journalism, Restored</p>
 
+<nav class="site-nav" aria-label="Primary">
+    <ul>
+        <li class="<?= $current_page === 'home' ? 'active' : '' ?>">
+            <a href="/">Home</a>
+        </li>
 
+        <li class="<?= $current_page === 'catalogue' ? 'active' : '' ?>">
+            <a href="/catalogue">Catalogue</a>
+        </li>
+
+        <li class="<?= $current_page === 'about' ? 'active' : '' ?>">
+            <a href="/about">About</a>
+        </li>
+    </ul>
 </nav>
+<style>
+.site-nav {
+    margin: 0 0 3rem 0;
+}
+
+.site-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.site-nav li {
+    display: inline;
+}
+
+.site-nav li + li::before {
+    content: "/";
+    color: #999;
+    margin: 0 0.75rem;
+}
+
+.site-nav a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.95rem;
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+}
+
+.site-nav li.active a {
+    color: #111;
+}
+</style>

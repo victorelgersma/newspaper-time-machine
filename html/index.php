@@ -77,7 +77,8 @@ render_404();
 
 // ---- Render Functions ----
 
-function get_compiled_links() {
+function get_compiled_links()
+{
     global $metadata, $publications, $articles_base;
     $links = [];
 
@@ -136,7 +137,8 @@ function get_compiled_links() {
     return $links;
 }
 
-function render_home() {
+function render_home()
+{
     global $site_name;
     $view_count = get_and_increment_page_views('home');
     $all_articles = get_compiled_links();
@@ -150,14 +152,15 @@ function render_home() {
         }
     }
     if (!$featured_article && !empty($all_articles)) {
-        $featured_article = $all_articles[0]; 
+        $featured_article = $all_articles[0];
     }
 
     $current_page = 'home';
     include(__DIR__ . '/home.php');
 }
 
-function render_catalogue() {
+function render_catalogue()
+{
     global $site_name;
     $view_count = get_and_increment_page_views('catalogue');
     $links = get_compiled_links();
@@ -165,11 +168,13 @@ function render_catalogue() {
     include(__DIR__ . '/catalogue.php');
 }
 
-function render_article($uri, $full_path) {
-    global $metadata, $publications;
+function render_article($uri, $full_path)
+{
+    global $metadata, $publications, $site_name;
     $view_count = get_and_increment_page_views($uri);
     $meta = $metadata[$uri];
 
+    $summary = $meta['summary'] ?? '';
     $title = $meta['title'];
     $pub_key = $meta['pub_key'];
     $pub_name = $publications[$pub_key] ?? (!empty($pub_key) ? ucfirst(str_replace('_', ' ', $pub_key)) : 'Archive Entry');
@@ -179,6 +184,7 @@ function render_article($uri, $full_path) {
     $article_header_partial = __DIR__ . '/partials/article_header.php';
     $content = file_get_contents($full_path);
     include(__DIR__ . '/layout.php');
+    exit();
 }
 
 // Keep render_404 and render_pending_transcription functions identical to what you have...

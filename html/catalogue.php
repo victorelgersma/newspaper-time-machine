@@ -1,17 +1,12 @@
-<!-- ./html/catalogue.php -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Archive Catalogue | <?= htmlspecialchars($site_name) ?></title>
-    <link rel="stylesheet" href="https://oldnews.vjbe.net/style/tufte.min.css">
+    <link rel="stylesheet" href="https://oldnews.vjbe.net/style/tufte.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body {
-            padding: 2rem;
-        }
-
         .pub-tag {
             font-variant: small-caps;
             font-size: 0.9rem;
@@ -19,6 +14,37 @@
 
         .date-tag {
             font-size: 0.8rem;
+        }
+
+        /* Force the table to respect exact column widths */
+        .fixed-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            text-align: left;
+            table-layout: fixed; 
+        }
+        
+
+        /* Truncation wrapper for the summary text */
+        .summary-truncate {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3; /* Change this number to control how many lines display before the "..." */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-height: 4.5em; /* Fallback for older browsers (line-height * lines) */
+            line-height: 1.5;
+        }
+
+        /* Clean up the link styles for the summary */
+        .summary-link {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+        }
+        .summary-link:hover .summary-truncate {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -29,19 +55,19 @@
     </header>
     <article>
 
-        <section style="width: 100%; max-width: 1200px;">
+        <section>
             <p class="sans" style="font-size: 1.1rem; margin-bottom: 1.5rem;">
                 Archive contains
                 <strong><?= number_format(count($links)) ?></strong>
                 digitized articles.
             </p>
             <div class="table-wrapper">
-                <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem; text-align: left;">
+                <table class="fixed-table">
                     <thead>
                         <tr style="border-bottom: 2px solid #ccc;">
-                            <th style="padding: 0.75rem; font-size: 1.1rem; width: 25%;">Publication / Date</th>
-                            <th style="padding: 0.75rem; font-size: 1.1rem; width: 30%;">Article Title</th>
-                            <th style="padding: 0.75rem; font-size: 1.1rem; width: 45%;">Summary Output</th>
+                            <th style="padding: 0.75rem; font-size: 1.1rem; width: 25%;"></th>
+                            <th style="padding: 0.75rem; font-size: 1.1rem; width: 30%;">Title</th>
+                            <th style="padding: 0.75rem; font-size: 1.1rem; width: 45%;">Summary</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,8 +82,16 @@
                                         <?= htmlspecialchars($article['title']) ?>
                                     </a>
                                 </td>
-                                <td style="padding: 1rem 0.75rem; font-size: 1.15rem; line-height: 1.6;">
-                                    <?= !empty($article['summary']) ? htmlspecialchars($article['summary']) : '<span style="font-style: italic; font-size: 0.95rem;">Pending transcription tracking details.</span>' ?>
+                                <td style="padding: 1rem 0.75rem; font-size: 1.15rem;">
+                                    <?php if (!empty($article['summary'])): ?>
+                                        <a href="/<?= htmlspecialchars($article['uri']) ?>" class="summary-link" title="Click to read full article">
+                                            <div class="summary-truncate">
+                                                <?= htmlspecialchars($article['summary']) ?>
+                                            </div>
+                                        </a>
+                                    <?php else: ?>
+                                        <span style="font-style: italic; font-size: 0.95rem;">Pending transcription tracking details.</span>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
