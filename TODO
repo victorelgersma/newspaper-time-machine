@@ -1,13 +1,18 @@
 
-- [ ] make it more newspapery-on mobile.
-- [ ] switch back to non-minified tufte and mod it to fit my justified, centered purpose.
+- [ ] add a "you can cite this newspaper article as" section
+- [ ] add link to markdown version of every article in the article header
+- [ ] make old news thematically different from vjbe.net so that is more clear which site ppl are on.
+- [ ] emphasize that the project aims to rectify the dearth of plain text newspaper articles. 
+- [ ] digitize the lancet article
+- [ ] integrate editorial notes (in markdown as (ed:: ) and then sidenotes + switching sidenotes on or off)
+- [ ] calculate day of the week automatically
+- [ ] or, alternatively: create a separate step to add the sidenotes (i.e manage the sidenotes separately in a JSON array with the words that the sidenote should appear after and the sidenote itself). This should be a compilation step in the digital humanities pipeline, not here, but here there will be a little switch that allows users to turn sidenotes on and off. a
+- [ ] add a proper sql based viewcounter. 
+- [x] make it more newspapery-on mobile.
 - [ ] convert all images to WEBP
-- [ ] add a "spot any mistakes?" - write to us - or create a pull request. 
- - [ ] add summary for each article
-- [ ] add a switch to turn sidenotes off and on
-- [ ] create a separate step to add the sidenotes (i.e manage the sidenotes separately in a JSON array with the words that the sidenote should appear after and the sidenote itself). This should be a compilation step in the digital humanities pipeline, not here, but here there will be a little switch that allows users to turn sidenotes on and off. a
-- [ ] replace my metadata in data.php with a meta.json file that I drop in each final folder. 
-- [ ] remove necessary day name (calculate it myself)
 - [ ] remove double titles
-- [ ] fix chronological ordering
 - [ ] add "see also" to https://www.victorianweb.org/philosophy/thought1.html
+
+
+Draft: 
+

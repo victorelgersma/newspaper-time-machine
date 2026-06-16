@@ -99,14 +99,6 @@
                 </table>
             </div>
         </section>
-
-        <?php if (isset($view_count)): ?>
-            <footer>
-                <p class="sans" style="font-size: 0.85rem;">
-                    Catalogue Index Explorations: <span class="numeral"><?= number_format($view_count) ?></span>
-                </p>
-            </footer>
-        <?php endif; ?>
     </article>
 </body>
 

@@ -9,6 +9,7 @@
     .centered {
         text-align: center;
     }
+
     /* Make headings live in the same column as text */
     section>h1,
     section>h2,
@@ -56,23 +57,30 @@
         letter-spacing: -0.01em;
         line-height: 1.2;
     }
-    section > p {
+
+    section>p {
         width: 100%;
+    }
+
+    .summary {
+        background: #f0f0f0;
+        padding: 0em 1em 1em 1em;
     }
 </style>
 <section>
     <p style="text-indent:0em; text-align: center">
 
+    <!-- Add link to plaintext version of article on github --> 
         <?= htmlspecialchars($pub_name) ?> — <?= htmlspecialchars($date_str) ?> <br>
         <a href="<?= htmlspecialchars($photo_link) ?>" target="_blank">
             View Original
         </a>
-    </p>
-    <p>
+    <p class="summary" style="text-align: left;">
         <br>
         <?php if (!empty($summary)): ?>
             <em> <?= htmlspecialchars($summary) ?> </em>
         <?php endif; ?>
         <br>
+    </p>
     </p>
 </section>

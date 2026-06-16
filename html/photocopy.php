@@ -95,14 +95,40 @@ if (is_dir($local_photo_path)) {
             background: #222;
             padding: 2px 5px;
         }
+
+        body {
+            text-align: center;
+        }
+
+        .controls {
+            margin: 2rem auto;
+            max-width: 900px;
+            text-align: left;
+            font-size: 1.2rem;
+            padding: 0 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            border-bottom: 1px solid #8cf;
+            transition: border-color 0.2s ease;
+        }
+
+        a:hover {
+            border-bottom-color: transparent;
+        }
     </style>
 </head>
 
 <body>
     <div class="controls">
+        <!-- New Back to Article Link -->
+        <a href="/<?= htmlspecialchars($uri) ?>" class="back-link">← Back to Article</a>
+
         <?php if ($source_url): ?>
-            <a href="<?= htmlspecialchars($source_url) ?>" target="_blank" class="source-link">Source
-                ↗</a>
+            <span style="margin: 0 1rem; opacity: 0.3;">|</span>
+            <a href="<?= htmlspecialchars($source_url) ?>" target="_blank" class="source-link">Source ↗</a>
         <?php endif; ?>
     </div>
 
@@ -114,7 +140,8 @@ if (is_dir($local_photo_path)) {
     <?php else: ?>
         <?php foreach ($images as $index => $img): ?>
             <img src="<?= htmlspecialchars($img) ?>" alt="Original Newspaper Clipping"
-                loading="<?= $index < 2 ? 'eager' : 'lazy' ?>" fetchpriority="<?= $index === 0 ? 'high' : 'auto' ?>" decoding="async">
+                loading="<?= $index < 2 ? 'eager' : 'lazy' ?>" fetchpriority="<?= $index === 0 ? 'high' : 'auto' ?>"
+                decoding="async">
         <?php endforeach; ?>
     <?php endif; ?>
 </body>

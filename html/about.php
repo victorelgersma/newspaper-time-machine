@@ -28,17 +28,12 @@
     margin: 0.3rem 0;
 }
 </style>
-<div class="callout">
-<p><span class="newthought"><em>Old News</em></span> is a digital
-humanities project dedicated to restoring and preserving historic
-journalism. Newspaper clippings are sourced from public-domain archives,
-transcribed into searchable text, and paired with their original scans
-for verification. The platform emphasizes readability, traceability, and
-open scholarship, making historical reporting easier to explore than
-traditional archive microfilm and scan repositories. View our <a
-href="https://oldnews.vjbe.net/catalogue">Full Catalogue</a>, or learn
-how to contribute below!</p>
-</div>
+<p>Old News aims to rectify the absence of high-fidelity, plain text
+versions of important historical newspaper articles. A lot of important
+work has been done in scanning old journals, but much remains to be done
+in converting these articles to <em>plain text</em> so that they can be
+conveniently read, easily searched, and easily linked to and referenced
+by scholars.</p>
 <nav class="toc">
 <strong>Contents</strong>
 <ol>
@@ -57,19 +52,11 @@ how to contribute below!</p>
 <li>
 <a href="#scholarship">Scholarship</a>
 </li>
+<li>
+<a href="#styling">Styling</a>
+</li>
 </ol>
 </nav>
-<h2 id="about">
-Why Old News?
-</h2>
-<p>Old News grew out of a dissatisfaction with the fact that most
-historic journalism is only accessible through grainy scans on obscure
-websites. We believe old news has a lot to teach historians, and we
-therefore believe that historians have a lot to gain if old newspaper
-articles are easy to read. The advent of free-to-use language models
-like ChatGPT, Gemini, Claude, and DeepSeek has made automated
-transcription a lot easier, which has made this sort of work much less
-time consuming.</p>
 <h2 id="contributing">
 Contributing
 </h2>
@@ -120,6 +107,13 @@ Newspaper Archive</a></li>
 <li><a href="https://archive.spectator.co.uk/">The Spectator
 Archive</a></li>
 </ul>
+<p>In addition, we hope to use the following sources soon:</p>
+<ul>
+<li><a href="delpher.nl">Delpher</a></li>
+<li><a
+href="https://gallica.bnf.fr/accueil/fr/html/accueil-fr">Gallica</a></li>
+<li><a href="https://www.gale.com/end-users">Gale</a></li>
+</ul>
 <h2 id="scholarship">
 Scholarship
 </h2>
@@ -130,7 +124,12 @@ know.</p>
 <p>So far, Victor Elgersma has based his mid-term paper on a few
 articles reviewer the infamous <em>Vestiges of the Natural History of
 Creation</em>. You can read his essay <a
-href="https://samizdat.vjbe.net/2026-04-13-SciPub%20Research%20Essay%202-4.pdf">here</a></p>
+href="https://samizdat.vjbe.net/2026-04-13-SciPub%20Research%20Essay%202-4.pdf">here</a>.</p>
 <p>Finally, the source code for this website is <a
 href="https://github.com/victorelgersma/old-news">also available</a>.
 Contributions are always welcome.</p>
+<h2 id="styling">
+Styling
+</h2>
+<p>We use <a href="https://github.com/edwardtufte/tufte-css">tufte</a>
+for styling</p>
