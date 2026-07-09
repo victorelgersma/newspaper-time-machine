@@ -22,6 +22,7 @@
     <article>
         <?php
         if (isset($article_header_partial)) {
+            $current_page = '';
             include $article_header_partial;
         }
         ?>

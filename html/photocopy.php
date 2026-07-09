@@ -7,7 +7,6 @@ $uri = str_replace(['../', '..\\'], '', $uri); // Sanitize
 $folder_name = str_replace('.html', '', $uri);
 
 $meta = $metadata[$uri] ?? [];
-$source_url = $meta['source_url'] ?? null;
 
 // Environment check: look for production path, fallback to local directory structure
 $local_photo_path = "/var/www/vjbe.net/html/oldnews-photos/" . $folder_name;
@@ -126,10 +125,7 @@ if (is_dir($local_photo_path)) {
         <!-- New Back to Article Link -->
         <a href="/<?= htmlspecialchars($uri) ?>" class="back-link">← Back to Article</a>
 
-        <?php if ($source_url): ?>
-            <span style="margin: 0 1rem; opacity: 0.3;">|</span>
-            <a href="<?= htmlspecialchars($source_url) ?>" target="_blank" class="source-link">Source ↗</a>
-        <?php endif; ?>
+
     </div>
 
     <?php if (empty($images)): ?>

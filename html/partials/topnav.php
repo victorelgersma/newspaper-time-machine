@@ -1,5 +1,5 @@
 <h1><?= htmlspecialchars($site_name) ?></h1>
-<p class="subtitle">Plain Text Historic Journalism</p>
+<p class="subtitle">Plain Text Historic Sources</p>
 
 <nav class="site-nav" aria-label="Primary">
     <ul>

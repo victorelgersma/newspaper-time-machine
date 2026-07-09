@@ -140,7 +140,6 @@ function get_compiled_links()
 function render_home()
 {
     global $site_name;
-    $view_count = get_and_increment_page_views('home');
     $all_articles = get_compiled_links();
 
     // Isolate the explicitly marked featured article. Fall back to newest item if none marked.
@@ -162,7 +161,6 @@ function render_home()
 function render_catalogue()
 {
     global $site_name;
-    $view_count = get_and_increment_page_views('catalogue');
     $links = get_compiled_links();
     $current_page = 'catalogue';
     include(__DIR__ . '/catalogue.php');
@@ -171,9 +169,9 @@ function render_catalogue()
 function render_article($uri, $full_path)
 {
     global $metadata, $publications, $site_name;
-    $view_count = get_and_increment_page_views($uri);
     $meta = $metadata[$uri];
 
+    $plaintext_url = "https://github.com/victorelgersma/oldnews-article-repo/blob/main/markdown/" . rawurlencode($uri) . "/main.md";
     $summary = $meta['summary'] ?? '';
     $title = $meta['title'];
     $pub_key = $meta['pub_key'];
@@ -181,6 +179,7 @@ function render_article($uri, $full_path)
     $date_str = (!empty($meta['date']) && $meta['date'] !== '//') ? $meta['date'] : 'Undated';
     $photo_link = "/photocopy/" . $uri;
 
+    $source_url = $meta['source_url'] ?? null;
     $article_header_partial = __DIR__ . '/partials/article_header.php';
     $content = file_get_contents($full_path);
     include(__DIR__ . '/layout.php');
@@ -214,7 +213,7 @@ function render_pending_transcription($uri)
         <div style='padding: 1.5rem; border-radius: 4px;'>
             <h3>Transcription Pending</h3>
             <p>The text for this article is still processing in our digital humanities pipeline.</p>
-            <p>Click <strong>'View Original'</strong> above to look at the original print clippings.</p>
+            <p>Click <strong>'View Photocopies'</strong> above to look at the original print clippings.</p>
         </div>";
 
     include(__DIR__ . '/layout.php');

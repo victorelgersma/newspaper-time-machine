@@ -42,7 +42,7 @@
 </nav>
 
 <h2 id="about">About</h2>
-Old News aims to be an open-access repository for high-fidelity transcriptions of important historical sources. Plain text transcriptions are easy to format and pleasing to read and reference. 
+Old News aims to be an open-access repository for high-fidelity transcriptions of important historical sources. We believe that plain text transcriptions are the most valuable long-term data store because plain text is easy to format and pleasing to read and reference. 
 
 <h2 id="contributing">Contributing</h2>
 
@@ -65,7 +65,7 @@ We are always adding new sources for our transcriptions. We are currently sourci
 
 In addition, we have been made aware of the following repositories: 
 
-- [Delpher](delpher.nl)
+- [Delpher](https://www.delpher.nl)
 - [Gallica](https://gallica.bnf.fr/accueil/fr/html/accueil-fr)
 - [Gale](https://www.gale.com/end-users)
 

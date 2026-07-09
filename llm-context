@@ -1,0 +1,22 @@
+ld News - Project Environment Context
+
+## Deployment & Path Architecture
+- Physical Path: /home/elgersmav/html/oldnews/
+- Production Path (Symlink Target): /var/www/vjbe.net/html/oldnews/
+- Base Directory Configuration ($base_dir): /var/www/vjbe.net/html/oldnews
+
+## Routing System
+- Handled via file-based custom router in `./html/index.php`.
+- Strict whitelist check against metadata array keys in `data.php`.
+- Views include `home.php`, `about.php`, `photocopy.php`, and a shared master template wrapper `layout.php`.
+
+## Analytics & Tracking (Unique Visitors)
+- System utilizes a file-based counter layer handled via `counter.php`.
+- Path Target for persistent metric data: `/var/www/vjbe.net/html/oldnews/stats/`
+- Filenames inside stats are sanitized strings matching page URIs (e.g., `home.txt`).
+- Session state tracking handles client uniqueness checking via `$_SESSION['visited_pages']`.
+
+## Deployment Mechanics
+- Run script `./html/run-dev.sh` uses the local PHP development server wrapper (`php -S localhost:3000`).
+- Deploy operations executed via `./deploy` shell executable script.
+

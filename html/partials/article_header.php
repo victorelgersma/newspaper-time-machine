@@ -70,11 +70,27 @@
 <section>
     <p style="text-indent:0em; text-align: center">
 
-    <!-- Add link to plaintext version of article on github --> 
-        <?= htmlspecialchars($pub_name) ?> — <?= htmlspecialchars($date_str) ?> <br>
+
+        <?= htmlspecialchars($pub_name) ?> — <?= htmlspecialchars($date_str) ?><br>
+
         <a href="<?= htmlspecialchars($photo_link) ?>" target="_blank">
             View Original
         </a>
+
+        <span style="margin: 0 1rem; opacity: 0.3;">|</span>
+
+        <a href="<?= htmlspecialchars($plaintext_url) ?>" target="_blank">
+            View Plain Text
+        </a>
+
+        <?php if ($source_url): ?>
+            <span style="margin: 0 1rem; opacity: 0.3;">|</span>
+
+            <a href="<?= htmlspecialchars($source_url) ?>" target="_blank">
+                Source ↗
+            </a>
+        <?php endif; ?>
+
     <p class="summary" style="text-align: left;">
         <br>
         <?php if (!empty($summary)): ?>
