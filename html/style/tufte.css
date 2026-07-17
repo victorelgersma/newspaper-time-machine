@@ -2,7 +2,9 @@
 
 /* Import ET Book styles
    adapted from https://github.com/edwardtufte/et-book/blob/gh-pages/et-book.css */
-
+* {
+    box-sizing: border-box
+}
 @font-face {
     font-family: "et-book";
     src: url("et-book/et-book-roman-line-figures/et-book-roman-line-figures.eot");
@@ -366,8 +368,8 @@ label.margin-toggle:not(.sidenote-number) {
 @media (max-width: 760px) {
     body {
         width: 84%;
-        padding-left: 8%;
-        padding-right: 8%;
+        padding-left: 1%;
+        padding-right: 1%;
     }
 
     hr,
