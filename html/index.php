@@ -7,9 +7,9 @@ $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $clean_uri = ltrim($request_uri, '/');
 $clean_uri = str_replace(['../', '..\\'], '', $clean_uri);
 
-// 1. Home Route (Featured Article View)
+// 1. Default Route (Redirect to Catalogue)
 if ($clean_uri === "" || $clean_uri === "index.php") {
-    render_home();
+    header("Location: /catalogue");
     exit;
 }
 

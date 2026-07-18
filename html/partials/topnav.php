@@ -3,10 +3,6 @@
 
 <nav class="site-nav" aria-label="Primary">
     <ul>
-        <li class="<?= $current_page === 'home' ? 'active' : '' ?>">
-            <a href="/">Home</a>
-        </li>
-
         <li class="<?= $current_page === 'catalogue' ? 'active' : '' ?>">
             <a href="/catalogue">Catalogue</a>
         </li>
