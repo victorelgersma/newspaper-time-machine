@@ -82,7 +82,7 @@
     <ul>
         <li>
             <a href="<?= htmlspecialchars($photo_link) ?>" target="_blank">
-                View Original
+                View Original Scans
             </a>
         </li>
         <li>
@@ -94,13 +94,11 @@
             <?php if ($source_url): ?>
 
                 <a href="<?= htmlspecialchars($source_url) ?>" target="_blank">
-                    Source
+                    Go To Source
                 </a>
             <?php endif; ?>
         </li>
     </ul>
-        <article>
     <p> <?= htmlspecialchars($pub_name) ?> </p>
     <p> <?= htmlspecialchars($date_str) ?> </p>
-    </article>
 </section>

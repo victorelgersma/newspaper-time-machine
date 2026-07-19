@@ -11,7 +11,6 @@ ld News - Project Environment Context
 - Views include `home.php`, `about.php`, `photocopy.php`, and a shared master template wrapper `layout.php`.
 
 ## Analytics & Tracking (Unique Visitors)
-- System utilizes a file-based counter layer handled via `counter.php`.
 - Path Target for persistent metric data: `/var/www/vjbe.net/html/oldnews/stats/`
 - Filenames inside stats are sanitized strings matching page URIs (e.g., `home.txt`).
 - Session state tracking handles client uniqueness checking via `$_SESSION['visited_pages']`.

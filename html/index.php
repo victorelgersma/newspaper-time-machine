@@ -1,7 +1,6 @@
 <?php
 // ./html/index.php
 require_once('data.php');
-require_once('counter.php');
 
 $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $clean_uri = ltrim($request_uri, '/');
@@ -135,27 +134,6 @@ function get_compiled_links()
     });
 
     return $links;
-}
-
-function render_home()
-{
-    global $site_name;
-    $all_articles = get_compiled_links();
-
-    // Isolate the explicitly marked featured article. Fall back to newest item if none marked.
-    $featured_article = null;
-    foreach ($all_articles as $art) {
-        if ($art['featured'] === true) {
-            $featured_article = $art;
-            break;
-        }
-    }
-    if (!$featured_article && !empty($all_articles)) {
-        $featured_article = $all_articles[0];
-    }
-
-    $current_page = 'home';
-    include(__DIR__ . '/home.php');
 }
 
 function render_catalogue()

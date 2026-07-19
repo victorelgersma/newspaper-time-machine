@@ -1,47 +1,73 @@
 <!-- ./about.md -->
-<p>Old News is a project borne out of a frustration with reading James
-Secord’s <em>Victorian Sensation</em>. This book, like many works of
-history, use old newspaper articles as evidence to support claims about
-the past. However, instead of making it easy for the interested reader
-to view the full articles in context, the author simply references the
-name and date of the newspaper, leaving the engaged reader to look up
-the required article in his own time on sites like “The British
-Newspaper Archive”. When the articles are found, they are often only
-available in grainy prints, making reading, referencing, and quoting
-difficult.</p>
-<p>In the 21st century, we historians can do better!</p>
-<p>Old News is an open-access, editable repository for high-fidelity
-transcriptions of important historical sources (mostly newspapers). We
-believe that plain text transcriptions are the most valuable long-term
-data store because plain text is easy to format and pleasing to read and
-reference.</p>
-<p>Contributions and text corrections are highly encouraged. You can
-help by finding <a href="#typos">typos</a> and by <a
-href="#article-contributions">contributing new sources</a>. If you spot
-another kind of mistake feel free to e-mail
-v.j.b.elgersma@students.uu.nl.</p>
-<p>If you find a typo or a mistake in our transcriptions, you can make a
-pull request on our article repository <a
-href="https://github.com/victorelgersma/oldnews-article-repo">here</a>.</p>
-<p>If you would like to contribute a source yourself, please provide the
-raw screenshots used in your OCR, and a link (if applicable) to the
-original source.</p>
-<p>We are always adding new sources for our transcriptions. We are
-currently sourcing articles from the following sources:</p>
+<h1 id="about-old-news">About Old News</h1>
+<p>Old News was born out of frustration while reading James Secord’s
+<em>Victorian Sensation</em>. Like many historical works, the book
+relies heavily on 19th-century newspaper articles to support its claims.
+Yet, rather than making it easy to view these sources in context, the
+text merely notes the publication name and date—leaving the reader to
+hunt down the original pages on platforms like <em>The British Newspaper
+Archive</em>. When found, these articles are frequently trapped in
+grainy, low-resolution scans that make reading, referencing, and quoting
+a chore.</p>
+<p>In the 21st century, historians can do better.</p>
+<p>Old News is an open-access, community-driven repository providing
+high-fidelity, plain-text transcriptions of crucial historical sources.
+We believe plain text is the ultimate long-term data store: it is
+lightweight, easy to format, and a pleasure to read or reference.</p>
+<hr />
+<h2 id="how-to-contribute">How to Contribute</h2>
+<p>Contributions and text corrections are highly encouraged. Whether you
+are fixing a typo or transcribing an entirely new source, your help
+keeps this archive accurate and accessible.</p>
+<h3 id="fixing-typos-mistakes">Fixing Typos &amp; Mistakes</h3>
+<p>If you spot a typo or formatting error in our transcriptions, you can
+submit a pull request directly to our article repository on GitHub:</p>
+<blockquote>
+<p><a
+href="https://github.com/victorelgersma/oldnews-article-repo"><strong>Old
+News Article Repository</strong></a></p>
+</blockquote>
+<p>For other kinds of mistakes, or if you prefer not to use GitHub, feel
+free to drop an email to <strong>victor@vjbe.net</strong>.</p>
+<h3 id="contributing-new-sources">Contributing New Sources</h3>
+<p>If you would like to contribute a new transcription, please include:
+- The complete, high-fidelity text transcription. - The raw screenshots
+or images used for your OCR process (to allow verification). - The link
+to the original digital source, if applicable.</p>
+<hr />
+<h2 id="our-sources">Our Sources</h2>
+<p>We are constantly expanding our archive. We actively source and
+transcribe material from the following platforms:</p>
 <ul>
 <li><a href="https://www.britishnewspaperarchive.co.uk/">The British
 Newspaper Archive</a></li>
 <li><a href="https://archive.spectator.co.uk/">The Spectator
 Archive</a></li>
 </ul>
-<p>In addition, we have been made aware of the following
+<p>We also closely monitor and utilize these outstanding digital
 repositories:</p>
 <ul>
-<li><a href="https://www.delpher.nl">Delpher</a></li>
+<li><a href="https://www.delpher.nl">Delpher</a> – Dutch historical
+newspapers, books, and journals.</li>
 <li><a
-href="https://gallica.bnf.fr/accueil/fr/html/accueil-fr">Gallica</a></li>
-<li><a href="https://www.gale.com/end-users">Gale</a></li>
+href="https://gallica.bnf.fr/accueil/fr/html/accueil-fr">Gallica</a> –
+The digital library of the Bibliothèque nationale de France.</li>
+<li><a href="https://www.gale.com/end-users">Gale</a> – Global research
+databases and primary source archives.</li>
 </ul>
-<p>The source code for this website is <a
-href="https://github.com/victorelgersma/old-news">also
-available</a>.</p>
+<hr />
+<h2 id="open-source">Open Source</h2>
+<p>Believing in open research means believing in open infrastructure.
+The source code for the platform engine itself is entirely public and
+available on <a
+href="https://github.com/victorelgersma/old-news">GitHub</a>.</p>
+<hr />
+<h2 id="scholarship">Scholarship</h2>
+<p>Old News has been used to support the following pieces of
+scholarship:</p>
+<ul>
+<li>(May 2026): Victor Elgersma used articles from Old News to write
+about the status of the Nebular Hypothesis in the mid-19th century. You
+can view his article <a
+href="https://samizdat.vjbe.net/2026-04-30-SciPub%20Research%20Essay%202.pdf">here</a></li>
+</ul>

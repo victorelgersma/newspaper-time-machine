@@ -12,6 +12,8 @@
         </li>
     </ul>
 </nav>
+<hr>
+
 <style>
 .site-nav {
     margin: 0 0 3rem 0;
@@ -41,7 +43,10 @@
     letter-spacing: 0.05em;
 }
 
+/* TARGET THE LINK INSIDE THE ACTIVE LI */
 .site-nav li.active a {
     color: #111;
+    font-weight: bold;
+    pointer-events: none; /* Optional: stops users re-clicking the page they're already on */
 }
 </style>
