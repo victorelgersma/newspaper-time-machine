@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-/* Import ET Book styles
-   adapted from https://github.com/edwardtufte/et-book/blob/gh-pages/et-book.css */
 * {
     box-sizing: border-box
 }
@@ -69,9 +67,6 @@ p.subtitle {
     line-height: 1;
 }
 
-.numeral {
-    font-family: et-book-roman-old-style;
-}
 
 .danger {
     color: red;
@@ -219,7 +214,6 @@ img {
 
 .sidenote-number:after,
 .sidenote:before {
-    font-family: et-book-roman-old-style;
     position: relative;
     vertical-align: baseline;
 }
