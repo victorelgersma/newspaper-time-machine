@@ -99,6 +99,33 @@
             <?php endif; ?>
         </li>
     </ul>
-    <p> <?= htmlspecialchars($pub_name) ?> </p>
-    <p> <?= htmlspecialchars($date_str) ?> </p>
+
+
+
+    <!-- How can these be centered on mobile but left aligned on desktop -->
+    <div class="article-meta">
+        <p class="pub-name"><?= htmlspecialchars($pub_name) ?></p>
+        <p class="pub-date"><?= htmlspecialchars($date_str) ?></p>
+    </div>
 </section>
+<style>
+    /* Mobile styling: Center the metadata text */
+    .article-meta {
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+    }
+
+    /* Remove paragraph indentations specifically for these header lines */
+    .article-meta p {
+        text-indent: 0;
+        margin: 0.2em 0;
+    }
+
+    /* Desktop overrides: Left-align the text when screen is wide */
+    @media (min-width: 761px) {
+        .article-meta {
+            text-align: left;
+        }
+    }
+</style>

@@ -16,6 +16,6 @@ ld News - Project Environment Context
 - Session state tracking handles client uniqueness checking via `$_SESSION['visited_pages']`.
 
 ## Deployment Mechanics
-- Run script `./html/run-dev.sh` uses the local PHP development server wrapper (`php -S localhost:3000`).
+- Run script `./html/run-dev.sh` uses the local PHP development server wrapper (`php -S localhost:8000`).
 - Deploy operations executed via `./deploy` shell executable script.
 
