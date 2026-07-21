@@ -30,10 +30,14 @@ News Article Repository</strong></a></p>
 <p>For other kinds of mistakes, or if you prefer not to use GitHub, feel
 free to drop an email to <strong>victor@vjbe.net</strong>.</p>
 <h3 id="contributing-new-sources">Contributing New Sources</h3>
-<p>If you would like to contribute a new transcription, please include:
-- The complete, high-fidelity text transcription. - The raw screenshots
-or images used for your OCR process (to allow verification). - The link
-to the original digital source, if applicable.</p>
+<p>If you would like to contribute a new transcription, please
+include:</p>
+<ul>
+<li>The complete, high-fidelity text transcription.</li>
+<li>The raw screenshots or images used for your OCR process (to allow
+verification).</li>
+<li>The link to the original digital source, if applicable.</li>
+</ul>
 <hr />
 <h2 id="our-sources">Our Sources</h2>
 <p>We are constantly expanding our archive. We actively source and

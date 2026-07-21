@@ -156,6 +156,7 @@ function render_article($uri, $full_path)
     $pub_name = $publications[$pub_key] ?? (!empty($pub_key) ? ucfirst(str_replace('_', ' ', $pub_key)) : 'Archive Entry');
     $date_str = (!empty($meta['date']) && $meta['date'] !== '//') ? $meta['date'] : 'Undated';
     $photo_link = "/photocopy/" . $uri;
+    $page_num = $meta['page'] ?? null; 
 
     $source_url = $meta['source_url'] ?? null;
     $article_header_partial = __DIR__ . '/partials/article_header.php';

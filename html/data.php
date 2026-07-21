@@ -33,7 +33,9 @@ if (is_dir($articles_base)) {
                     $month = $json_data['month'] ?? '00';
                     $day   = $json_data['day'] ?? '00';
                     
-                    $display_date = "$day/$month/$year";
+                    $date_obj = DateTime::createFromFormat('Y-n-j', "$year-$month-$day");
+                    $display_date = $date_obj ? $date_obj->format('j M, Y') : "$day/$month/$year";
+
                     $sort_date    = "$year-$month-$day";
 
                     $metadata[$item] = [
@@ -45,6 +47,7 @@ if (is_dir($articles_base)) {
                         'sort_date'  => $sort_date,
                         'pub_key'    => $json_data['newspaper'] ?? '',
                         'summary'    => $json_data['summary'] ?? '',
+                        'page'       => $json_data['page'] ?? null,   // <-- new
                         
                         // FIX: Explicitly save the dynamic root-relative link here!
                         'link'       => '/' . $item 

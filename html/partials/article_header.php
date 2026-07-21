@@ -101,12 +101,12 @@
     </ul>
 
 
-
     <!-- How can these be centered on mobile but left aligned on desktop -->
     <div class="article-meta">
-        <p class="pub-name"><?= htmlspecialchars($pub_name) ?></p>
-        <p class="pub-date"><?= htmlspecialchars($date_str) ?></p>
-    </div>
+        <p class="pub-name">
+            <em><?= htmlspecialchars($pub_name) ?></em>,
+            <?= htmlspecialchars($date_str) ?><?= !empty($page_num) ? ', p. ' . htmlspecialchars($page_num) : '' ?>
+        </p>
 </section>
 <style>
     /* Mobile styling: Center the metadata text */
