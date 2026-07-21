@@ -13,11 +13,11 @@ Newspaper Archive</em>. Since the text is in the public domain, we
 thought it would cost little effort to transcribe the works and host
 them on this site, making them easy to read and reference.</p>
 <hr />
-<h2 id="how-to-contribute">How to Contribute</h2>
+<h1 id="how-to-contribute">How to Contribute</h1>
 <p>Contributions and text corrections are highly encouraged. Whether you
 are fixing a typo or transcribing an entirely new source, your help
 keeps this archive accurate and accessible.</p>
-<h3 id="fixing-typos-mistakes">Fixing Typos &amp; Mistakes</h3>
+<h2 id="fixing-typos-mistakes">Fixing Typos &amp; Mistakes</h2>
 <p>If you spot a typo or formatting error in our transcriptions, you can
 submit a pull request directly to our article repository on GitHub:</p>
 <blockquote>
@@ -27,7 +27,7 @@ News Article Repository</strong></a></p>
 </blockquote>
 <p>For other kinds of mistakes, or if you prefer not to use GitHub, feel
 free to drop an email to <strong>victor@vjbe.net</strong>.</p>
-<h3 id="contributing-new-sources">Contributing New Sources</h3>
+<h2 id="adding-new-sources">Adding New Sources</h2>
 <p>If you would like to contribute a new transcription, please
 include:</p>
 <ul>
@@ -39,7 +39,7 @@ verification).</li>
 <li>The author (if applicable)</li>
 </ul>
 <hr />
-<h2 id="our-sources">Our Sources</h2>
+<h1 id="our-sources">Our Sources</h1>
 <p>We are constantly expanding our archive. We actively source and
 transcribe material from the following platforms:</p>
 <ul>
@@ -60,7 +60,7 @@ The digital library of the Bibliothèque nationale de France.</li>
 databases and primary source archives.</li>
 </ul>
 <hr />
-<h2 id="scholarship">Scholarship</h2>
+<h1 id="scholarship">Scholarship</h1>
 <p>Old News has been used to support the following pieces of
 scholarship:</p>
 <ul>
@@ -70,7 +70,7 @@ can view his article <a
 href="https://samizdat.vjbe.net/2026-04-30-SciPub%20Research%20Essay%202.pdf">here</a></li>
 </ul>
 <hr />
-<h2 id="open-source">Open Source</h2>
+<h1 id="open-source">Open Source</h1>
 <p>Believing in open research means believing in open infrastructure.
 The source code for this website public and available on <a
 href="https://github.com/victorelgersma/old-news">GitHub</a>.</p>

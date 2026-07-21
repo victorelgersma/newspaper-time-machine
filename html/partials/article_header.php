@@ -69,8 +69,6 @@
 </style>
 <section>
 
-
-
     <p class="summary" style="text-align: left;">
         <br>
         <?php if (!empty($summary)): ?>
@@ -96,14 +94,13 @@
                 View Plain Text
             </a>
         </li>
-        <li>
-            <?php if ($source_url): ?>
-
+        <?php if ($source_url): ?>
+            <li>
                 <a href="<?= htmlspecialchars($source_url) ?>" target="_blank">
                     Go To Source
                 </a>
-            <?php endif; ?>
-        </li>
+            </li>
+        <?php endif; ?>
     </ul>
 </section>
 <style>
