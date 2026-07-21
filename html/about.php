@@ -38,6 +38,14 @@ verification).</li>
 <li>The name of the publication, the date, and the page number.</li>
 <li>The author (if applicable)</li>
 </ul>
+<h3 id="transcription-pipeline">Transcription Pipeline</h3>
+<p>Feel free to use any method of transcription you like. For your
+convenience I have open-sourced the pipeline I use:</p>
+<blockquote>
+<p><a
+href="https://github.com/victorelgersma/oldnews-OCR-pipeline"><strong>Transcription
+Pipeline</strong></a></p>
+</blockquote>
 <hr />
 <h1 id="our-sources">Our Sources</h1>
 <p>We are constantly expanding our archive. We actively source and

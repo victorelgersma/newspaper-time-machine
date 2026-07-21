@@ -30,6 +30,13 @@ If you would like to contribute a new transcription, please include:
 - The name of the publication, the date, and the page number. 
 - The author (if applicable)
 
+### Transcription Pipeline
+
+Feel free to use any method of transcription you like. For your convenience I have open-sourced the pipeline I use:
+
+> [**Transcription Pipeline**](https://github.com/victorelgersma/oldnews-OCR-pipeline)
+
+
 ---
 
 # Our Sources

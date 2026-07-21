@@ -1,23 +1,13 @@
 <?php
 $sort = $_GET['sort'] ?? 'newest';
-
 usort($links, function ($a, $b) use ($sort) {
-    // 'd/m/Y' explicitly tells PHP: Day first, then Month, then 4-digit Year
-    $format = 'd/m/Y'; 
-    
-    $dateA = DateTime::createFromFormat($format, trim($a['date']));
-    $dateB = DateTime::createFromFormat($format, trim($b['date']));
-    
-    // Convert to Unix timestamps, handling any missing/malformed data gracefully
-    $timeA = $dateA ? $dateA->getTimestamp() : 0;
-    $timeB = $dateB ? $dateB->getTimestamp() : 0;
-    
+    $timeA = strtotime($a['sort_date']);
+    $timeB = strtotime($b['sort_date']);
     return $sort === 'oldest' ? $timeA <=> $timeB : $timeB <=> $timeA;
 });
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Archive Catalogue | <?= htmlspecialchars($site_name) ?></title>
@@ -29,7 +19,6 @@ usort($links, function ($a, $b) use ($sort) {
             padding: 0;
             list-style: none;
         }
-
         .archive-item {
             display: flex;
             flex-direction: column;
@@ -37,52 +26,82 @@ usort($links, function ($a, $b) use ($sort) {
             padding: 1rem 0;
             border-bottom: 1px solid #eee;
         }
-
         .meta-group {
             display: flex;
             gap: 0.75rem;
             align-items: center;
             color: #666;
         }
-
         .pub-tag {
             font-variant: small-caps;
             font-size: 0.85rem;
             font-weight: 600;
         }
-
         .date-tag {
             font-size: 0.85rem;
         }
-
+        .content-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            min-width: 0;
+        }
         .article-title {
             font-size: 1.1rem;
             font-weight: 700;
             text-decoration: none;
             color: #111;
         }
-
         .article-title:hover {
             text-decoration: underline;
         }
-
+        .summary-toggle {
+            font-size: 0.85rem;
+        }
+        .summary-toggle summary {
+            cursor: pointer;
+            color: #0066cc;
+            list-style: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            width: fit-content;
+        }
+        .summary-toggle summary::-webkit-details-marker {
+            display: none;
+        }
+        .summary-toggle summary::before {
+            content: "\25B8";
+            font-size: 0.7rem;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+        .summary-toggle[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .summary-toggle summary:hover {
+            text-decoration: underline;
+        }
+        .summary-text {
+            margin: 0.4rem 0 0;
+            color: #444;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
         .sort-controls {
             font-size: 0.9rem;
             margin-bottom: 1.5rem;
             color: #666;
         }
-
         .sort-link {
             text-decoration: none;
             color: #0066cc;
         }
-
         .sort-link.active {
             color: #111;
             font-weight: bold;
             pointer-events: none;
         }
-
         @media (min-width: 600px) {
             .archive-item {
                 flex-direction: row;
@@ -99,7 +118,6 @@ usort($links, function ($a, $b) use ($sort) {
         }
     </style>
 </head>
-
 <body>
     <header>
         <?php include __DIR__ . '/partials/topnav.php'; ?>
@@ -110,13 +128,11 @@ usort($links, function ($a, $b) use ($sort) {
                 <strong><?= number_format(count($links)) ?></strong>
                 articles.
             </p> -->
-
             <div class="sans sort-controls">
                 Sort by: 
                 <a href="?sort=newest" class="sort-link <?= $sort === 'newest' ? 'active' : '' ?>">Newest</a> | 
                 <a href="?sort=oldest" class="sort-link <?= $sort === 'oldest' ? 'active' : '' ?>">Oldest</a>
             </div>
-
             <ul class="archive-list">
                 <?php foreach ($links as $article): ?>
                     <li class="archive-item">
@@ -124,15 +140,23 @@ usort($links, function ($a, $b) use ($sort) {
                             <span class="pub-tag"><?= htmlspecialchars($article['pub']) ?></span>
                             <span class="date-tag"><?= htmlspecialchars($article['date']) ?></span>
                         </div>
-                        
-                        <a class="article-title" href="/<?= htmlspecialchars($article['uri']) ?>">
-                            <?= htmlspecialchars($article['title']) ?>
-                        </a>
+
+                        <div class="content-group">
+                            <a class="article-title" href="/<?= htmlspecialchars($article['uri']) ?>">
+                                <?= htmlspecialchars($article['title']) ?>
+                            </a>
+
+                            <?php if (!empty($article['summary'])): ?>
+                                <details class="summary-toggle">
+                                    <summary>Summary</summary>
+                                    <p class="summary-text"><?= htmlspecialchars($article['summary']) ?></p>
+                                </details>
+                            <?php endif; ?>
+                        </div>
                     </li>
                 <?php endforeach; ?>
             </ul>
         </section>
     </article>
 </body>
-
 </html>
