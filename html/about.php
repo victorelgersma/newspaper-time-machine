@@ -1,19 +1,17 @@
 <!-- ./about.md -->
-<h1 id="about-old-news">About Old News</h1>
-<p>Old News was born out of frustration while reading James Secord’s
-<em>Victorian Sensation</em>. Like many historical works, the book
-relies heavily on 19th-century newspaper articles to support its claims.
-Yet, rather than making it easy to view these sources in context, the
-text merely notes the publication name and date—leaving the reader to
-hunt down the original pages on platforms like <em>The British Newspaper
-Archive</em>. When found, these articles are frequently trapped in
-grainy, low-resolution scans that make reading, referencing, and quoting
-a chore.</p>
-<p>In the 21st century, historians can do better.</p>
+<h1 id="what-is-old-news">What is Old News?</h1>
 <p>Old News is an open-access, community-driven repository providing
 high-fidelity, plain-text transcriptions of crucial historical sources.
 We believe plain text is the ultimate long-term data store: it is
 lightweight, easy to format, and a pleasure to read or reference.</p>
+<h1 id="why-did-you-make-old-news">Why did you make Old News?</h1>
+<p>Old News was born out of frustration while reading James Secord’s
+<em>Victorian Sensation</em> (2000). It relies heavily on 19th-century
+newspaper articles to support its claims but it leaves it to the reader
+to hunt down the original pages on platforms like <em>The British
+Newspaper Archive</em>. Since the text is in the public domain, we
+thought it would cost little effort to transcribe the works and host
+them on this site, making them easy to read and reference.</p>
 <hr />
 <h2 id="how-to-contribute">How to Contribute</h2>
 <p>Contributions and text corrections are highly encouraged. Whether you
@@ -37,6 +35,8 @@ include:</p>
 <li>The raw screenshots or images used for your OCR process (to allow
 verification).</li>
 <li>The link to the original digital source, if applicable.</li>
+<li>The name of the publication, the date, and the page number.</li>
+<li>The author (if applicable)</li>
 </ul>
 <hr />
 <h2 id="our-sources">Our Sources</h2>
@@ -60,12 +60,6 @@ The digital library of the Bibliothèque nationale de France.</li>
 databases and primary source archives.</li>
 </ul>
 <hr />
-<h2 id="open-source">Open Source</h2>
-<p>Believing in open research means believing in open infrastructure.
-The source code for the platform engine itself is entirely public and
-available on <a
-href="https://github.com/victorelgersma/old-news">GitHub</a>.</p>
-<hr />
 <h2 id="scholarship">Scholarship</h2>
 <p>Old News has been used to support the following pieces of
 scholarship:</p>
@@ -75,3 +69,8 @@ about the status of the Nebular Hypothesis in the mid-19th century. You
 can view his article <a
 href="https://samizdat.vjbe.net/2026-04-30-SciPub%20Research%20Essay%202.pdf">here</a></li>
 </ul>
+<hr />
+<h2 id="open-source">Open Source</h2>
+<p>Believing in open research means believing in open infrastructure.
+The source code for this website public and available on <a
+href="https://github.com/victorelgersma/old-news">GitHub</a>.</p>

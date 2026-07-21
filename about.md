@@ -9,18 +9,18 @@ Old News was born out of frustration while reading James Secord's *Victorian Sen
 
 ---
 
-## How to Contribute
+# How to Contribute
 
 Contributions and text corrections are highly encouraged. Whether you are fixing a typo or transcribing an entirely new source, your help keeps this archive accurate and accessible. 
 
-### Fixing Typos & Mistakes
+## Fixing Typos & Mistakes
 If you spot a typo or formatting error in our transcriptions, you can submit a pull request directly to our article repository on GitHub:
 
 > [**Old News Article Repository**](https://github.com/victorelgersma/oldnews-article-repo)
 
 For other kinds of mistakes, or if you prefer not to use GitHub, feel free to drop an email to **victor@vjbe.net**.
 
-### Contributing New Sources
+## Adding New Sources
 
 If you would like to contribute a new transcription, please include:
 
@@ -32,7 +32,7 @@ If you would like to contribute a new transcription, please include:
 
 ---
 
-## Our Sources
+# Our Sources
 
 We are constantly expanding our archive. We actively source and transcribe material from the following platforms:
 
@@ -48,7 +48,7 @@ We also closely monitor and utilize these outstanding digital repositories:
 
 ---
 
-## Scholarship
+# Scholarship
 
 Old News has been used to support the following pieces of scholarship: 
 
@@ -57,6 +57,6 @@ Old News has been used to support the following pieces of scholarship:
 
 ---
 
-## Open Source
+# Open Source
 
 Believing in open research means believing in open infrastructure. The source code for this website public and available on [GitHub](https://github.com/victorelgersma/old-news).

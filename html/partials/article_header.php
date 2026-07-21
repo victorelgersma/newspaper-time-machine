@@ -79,6 +79,12 @@
         <?php endif; ?>
         <br>
     </p>
+    <div class="article-meta">
+        <p class="pub-name">
+            <em><?= htmlspecialchars($pub_name) ?></em>,
+            <?= htmlspecialchars($date_str) ?><?= !empty($page_num) ? ', p. ' . htmlspecialchars($page_num) : '' ?>
+        </p>
+    </div>
     <ul>
         <li>
             <a href="<?= htmlspecialchars($photo_link) ?>" target="_blank">
@@ -99,14 +105,6 @@
             <?php endif; ?>
         </li>
     </ul>
-
-
-    <!-- How can these be centered on mobile but left aligned on desktop -->
-    <div class="article-meta">
-        <p class="pub-name">
-            <em><?= htmlspecialchars($pub_name) ?></em>,
-            <?= htmlspecialchars($date_str) ?><?= !empty($page_num) ? ', p. ' . htmlspecialchars($page_num) : '' ?>
-        </p>
 </section>
 <style>
     /* Mobile styling: Center the metadata text */
