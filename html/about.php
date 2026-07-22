@@ -1,32 +1,30 @@
 <!-- ./about.md -->
+<p>Get in touch: <strong>victor@vjbe.net</strong>.</p>
 <h1 id="what-is-old-news">What is Old News?</h1>
 <p>Old News is an open-access, community-driven repository providing
-high-fidelity, plain-text transcriptions of crucial historical sources.
-We believe plain text is the ultimate long-term data store: it is
-lightweight, easy to format, and a pleasure to read or reference.</p>
+high-fidelity, plain-text transcriptions of interesting historic
+newspaper articles. We believe plain text is the ultimate long-term data
+store: it is lightweight, easy to format, and a pleasure to read or
+reference.</p>
 <h1 id="why-did-you-make-old-news">Why did you make Old News?</h1>
-<p>Old News was born out of frustration while reading James Secord’s
-<em>Victorian Sensation</em> (2000). It relies heavily on 19th-century
-newspaper articles to support its claims but it leaves it to the reader
-to hunt down the original pages on platforms like <em>The British
-Newspaper Archive</em>. Since the text is in the public domain, we
-thought it would cost little effort to transcribe the works and host
-them on this site, making them easy to read and reference.</p>
-<hr />
+<p>Old News was originally born out of frustration while reading a
+history of 19th-century science that relies heavily on newspaper
+articles to support its claims, but leaves it to the reader to hunt down
+the original pages on platforms like The British Newspaper Archive.
+Since the text is in the public domain, we thought it would cost little
+effort to transcribe the works and host them on this site, making them
+easy to read and reference. Since then the archive has grown.</p>
 <h1 id="how-to-contribute">How to Contribute</h1>
 <p>Contributions and text corrections are highly encouraged. Whether you
 are fixing a typo or transcribing an entirely new source, your help
 keeps this archive accurate and accessible.</p>
 <h2 id="fixing-typos-mistakes">Fixing Typos &amp; Mistakes</h2>
 <p>If you spot a typo or formatting error in our transcriptions, you can
-submit a pull request directly to our article repository on GitHub:</p>
-<blockquote>
-<p><a
-href="https://github.com/victorelgersma/oldnews-article-repo"><strong>Old
-News Article Repository</strong></a></p>
-</blockquote>
-<p>For other kinds of mistakes, or if you prefer not to use GitHub, feel
-free to drop an email to <strong>victor@vjbe.net</strong>.</p>
+submit a pull request directly to our <a
+href="https://github.com/victorelgersma/oldnews-article-repo">article
+repository</a> on GitHub. For other kinds of mistakes, or if you prefer
+not to use GitHub, feel free to drop an email to
+<strong>victor@vjbe.net</strong>.</p>
 <h2 id="adding-new-sources">Adding New Sources</h2>
 <p>If you would like to contribute a new transcription, please
 include:</p>
@@ -40,13 +38,7 @@ verification).</li>
 </ul>
 <h3 id="transcription-pipeline">Transcription Pipeline</h3>
 <p>Feel free to use any method of transcription you like. For your
-convenience I have open-sourced the pipeline I use:</p>
-<blockquote>
-<p><a
-href="https://github.com/victorelgersma/oldnews-OCR-pipeline"><strong>Transcription
-Pipeline</strong></a></p>
-</blockquote>
-<hr />
+convenience I have open-sourced the pipeline I use.</p>
 <h1 id="our-sources">Our Sources</h1>
 <p>We are constantly expanding our archive. We actively source and
 transcribe material from the following platforms:</p>
@@ -78,7 +70,14 @@ can view his article <a
 href="https://samizdat.vjbe.net/2026-04-30-SciPub%20Research%20Essay%202.pdf">here</a></li>
 </ul>
 <hr />
-<h1 id="open-source">Open Source</h1>
-<p>Believing in open research means believing in open infrastructure.
-The source code for this website public and available on <a
-href="https://github.com/victorelgersma/old-news">GitHub</a>.</p>
+<h1 id="github-links">GitHub Links:</h1>
+<ul>
+<li><a
+href="https://github.com/victorelgersma/oldnews-article-repo"><strong>Old
+News Article Repository</strong></a></li>
+<li><a
+href="https://github.com/victorelgersma/oldnews-OCR-pipeline"><strong>Transcription
+Pipeline</strong></a></li>
+<li><a href="https://github.com/victorelgersma/old-news"><strong>This
+Website</strong></a>.</li>
+</ul>

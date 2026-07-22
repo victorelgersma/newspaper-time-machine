@@ -91,7 +91,7 @@
         </li>
         <li>
             <a href="<?= htmlspecialchars($plaintext_url) ?>" target="_blank">
-                View Plain Text
+                View/Edit Plain Text
             </a>
         </li>
         <?php if ($source_url): ?>
@@ -115,6 +115,10 @@
     .article-meta p {
         text-indent: 0;
         margin: 0.2em 0;
+    }
+    .pub-name {
+        font-kerning: auto;
+        text-align: left; 
     }
 
     /* Desktop overrides: Left-align the text when screen is wide */

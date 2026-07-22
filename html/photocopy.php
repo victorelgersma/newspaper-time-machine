@@ -97,6 +97,9 @@ if (is_dir($local_photo_path)) {
 
         body {
             text-align: center;
+            width: 100%;
+            padding-left: 0;
+            margin: 0;
         }
 
         .controls {
